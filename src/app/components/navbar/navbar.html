@@ -1,0 +1,104 @@
+<!-- =============================================================
+     NAVBAR COMPONENT
+     - Transparent by default, solid (#fff5dc) after 50 vh scroll
+     - [class.scrolled] binding drives the state change
+     - Mobile hamburger collapses nav links into a drawer
+     ============================================================= -->
+<header
+  class="navbar"
+  [class.scrolled]="isScrolled()"
+  [class.menu-open]="menuOpen()"
+  role="banner">
+
+  <nav class="navbar__inner" aria-label="Main navigation">
+
+    <!-- ── LOGO (links to home) ───────────────────────────── -->
+    <a href="/" class="navbar__logo" aria-label="Go to home page" (click)="closeMenu()">
+      <img
+        src="logo.webp"
+        alt="Brand logo"
+        class="navbar__logo-img"
+        width="48"
+        height="48" />
+    </a>
+
+    <!-- ── DESKTOP NAV LINKS (centre) ────────────────────── -->
+    <ul class="navbar__links" role="list">
+
+      <!-- Wedding Gallery -->
+      <li>
+        <a href="#wedding-gallery" class="navbar__link" (click)="closeMenu()">
+          Wedding Gallery
+        </a>
+      </li>
+
+      <!-- Portfolio -->
+      <li>
+        <a href="#portfolio" class="navbar__link" (click)="closeMenu()">
+          Portfolio
+        </a>
+      </li>
+
+      <!-- About Us -->
+      <li>
+        <a href="#about" class="navbar__link" (click)="closeMenu()">
+          About Us
+        </a>
+      </li>
+
+      <!-- Services -->
+      <li>
+        <a href="#services" class="navbar__link" (click)="closeMenu()">
+          Services
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- ── RIGHT SIDE: CTA + Hamburger ───────────────────── -->
+    <div class="navbar__right">
+
+      <!-- Contact CTA button (always visible on desktop) -->
+      <a href="#contact" class="navbar__cta" (click)="closeMenu()">
+        Contact
+      </a>
+
+      <!-- Hamburger button — mobile only ───────────────── -->
+      <button
+        class="navbar__hamburger"
+        [class.is-active]="menuOpen()"
+        (click)="toggleMenu()"
+        aria-label="Toggle navigation menu"
+        [attr.aria-expanded]="menuOpen()">
+
+        <!-- Three bars animate into × when open -->
+        <span class="navbar__hamburger-bar"></span>
+        <span class="navbar__hamburger-bar"></span>
+        <span class="navbar__hamburger-bar"></span>
+      </button>
+
+    </div>
+
+  </nav>
+
+  <!-- ── MOBILE DRAWER ─────────────────────────────────────── -->
+  <!-- Slides down from header when menuOpen is true          -->
+  <div class="navbar__drawer" [class.is-open]="menuOpen()" role="dialog" aria-label="Mobile navigation">
+
+    <ul class="navbar__drawer-links" role="list">
+
+      <li><a href="#wedding-gallery" class="navbar__drawer-link" (click)="closeMenu()">Wedding Gallery</a></li>
+      <li><a href="#portfolio"       class="navbar__drawer-link" (click)="closeMenu()">Portfolio</a></li>
+      <li><a href="#about"           class="navbar__drawer-link" (click)="closeMenu()">About Us</a></li>
+      <li><a href="#services"        class="navbar__drawer-link" (click)="closeMenu()">Services</a></li>
+
+      <!-- Contact repeated in drawer for mobile convenience -->
+      <li>
+        <a href="#contact" class="navbar__drawer-cta" (click)="closeMenu()">Contact</a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</header>

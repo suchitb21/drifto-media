@@ -1,0 +1,407 @@
+/* =============================================================
+   NAVBAR COMPONENT STYLES
+   Angular component — all tokens in :host for easy theming
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS  ← modify here to retheme
+   ───────────────────────────────────────────────────────────── */
+:host {
+  /* ── Transparent state (before scroll) ── */
+  --nav-bg-transparent:       transparent;
+  --nav-text-transparent:     #000000;      /* white text over hero image/video  */
+  --nav-cta-bg-transparent:   #ff6105;
+  --nav-cta-text-transparent: #fff5dc;      /* accent orange from hero            */
+  /* ── Scrolled / Solid state ── */
+  --nav-bg-solid:             #fff5dc;      /* warm beige                         */
+  --nav-text-solid:           #000000;      /* black text                         */
+  --nav-cta-bg-solid:         #000000;
+  --nav-cta-text-solid:       #ff6105;
+  --nav-logo-filter:          brightness(0) invert(1); /* make logo white */
+  --nav-logo-filter-solid:    none;         /* show logo in natural colours       */
+
+  /* ── Shared ── */
+  --nav-accent:               #ff6105;      /* yellow accent for hover underline  */
+  --nav-height:               4.5rem;       /* navbar height                      */
+  --nav-font:                 'Anton', Arial, sans-serif;
+  --nav-body-font:            'Outfit', Arial, sans-serif; /* nav link font       */
+  --nav-transition:           0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-shadow-solid:         0 4px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Mobile drawer ── */
+  --nav-drawer-bg:            #fff5dc;
+  --nav-drawer-text:          #000000;
+
+  display: block;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. HEADER / NAVBAR BASE
+      - position: fixed so it stays on top while scrolling
+      - starts transparent, .scrolled class makes it solid
+   ───────────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  /* Default: transparent */
+  background-color: var(--nav-bg-transparent);
+  color: var(--nav-text-transparent);
+
+  /* Smooth bg + shadow transition on scroll */
+  transition:
+    background-color var(--nav-transition),
+    box-shadow       var(--nav-transition),
+    backdrop-filter  var(--nav-transition);
+}
+
+/* Slight blur glass effect before fully solid — feels premium */
+.navbar:not(.scrolled) {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── Scrolled / Solid state ──────────────────────────────── */
+.navbar.scrolled {
+  background-color: var(--nav-bg-solid);
+  color:            var(--nav-text-solid);
+  box-shadow:       var(--nav-shadow-solid);
+  backdrop-filter:  none;
+  -webkit-backdrop-filter: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. INNER LAYOUT  (logo | links | cta)
+   ───────────────────────────────────────────────────────────── */
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  gap: 1.5rem;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. LOGO
+   ───────────────────────────────────────────────────────────── */
+.navbar__logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  /* Subtle scale on hover */
+  transition: transform 0.2s ease;
+}
+
+.navbar__logo:hover {
+  transform: scale(1.05);
+}
+
+.navbar__logo-img {
+  height: 3rem;
+  width: auto;
+  object-fit: contain;
+
+  /* White in transparent state, natural in solid state */
+  filter: var(--nav-logo-filter) ;
+  transition: filter white;
+
+}
+
+/* Switch logo colour when navbar is solid */
+.navbar.scrolled .navbar__logo-img {
+  filter: var(--nav-logo-filter-solid);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. DESKTOP NAV LINKS  (centre, hidden on mobile)
+   ───────────────────────────────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Individual link */
+.navbar__link {
+  position: relative;
+  font-family: var(--nav-body-font);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  /* Colour inherits from .navbar state */
+  color: #fff5dc;
+  transition: color var(--nav-transition), opacity 0.2s;
+}
+
+.navbar.scrolled .navbar__link {
+  color: var(--nav-text-solid);
+}
+
+/* Animated underline on hover */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--nav-accent);
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+
+.navbar__link:hover::after,
+.navbar__link:focus-visible::after {
+  width: 100%;
+}
+
+.navbar__link:hover {
+  opacity: 0.85;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. RIGHT SIDE WRAPPER (CTA + Hamburger)
+   ───────────────────────────────────────────────────────────── */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. CONTACT CTA BUTTON
+   ───────────────────────────────────────────────────────────── */
+.navbar__cta {
+  display: inline-block;
+  padding: 0.55rem 1.6rem;
+  border-radius: 999px;
+
+  font-family: var(--nav-font);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  /* Transparent state styling */
+  background-color: var(--nav-cta-bg-transparent);
+  color: var(--nav-cta-text-transparent);
+
+  transition:
+    background-color var(--nav-transition),
+    color            var(--nav-transition),
+    transform        0.2s ease,
+    box-shadow       0.2s ease;
+}
+
+.navbar.scrolled .navbar__cta {
+  background-color: var(--nav-cta-bg-solid);
+  color:            var(--nav-cta-text-solid);
+}
+
+.navbar__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.navbar__cta:active {
+  transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. HAMBURGER BUTTON  (mobile only, hidden on desktop)
+   ───────────────────────────────────────────────────────────── */
+.navbar__hamburger {
+  display: none;          /* shown via media query below */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem;
+  height: 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+/* The three bars */
+.navbar__hamburger-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+
+  background-color: var(--nav-text-transparent);
+  transition:
+    transform  0.3s ease,
+    opacity    0.3s ease,
+    background-color var(--nav-transition);
+}
+
+/* Bar colour in solid state */
+.navbar.scrolled .navbar__hamburger-bar {
+  background-color: var(--nav-text-solid);
+}
+
+/* Animate bars into × when open */
+.navbar__hamburger.is-active .navbar__hamburger-bar:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+.navbar__hamburger.is-active .navbar__hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.navbar__hamburger.is-active .navbar__hamburger-bar:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. MOBILE DRAWER
+       Slides down from header, hidden by default
+   ───────────────────────────────────────────────────────────── */
+.navbar__drawer {
+  background-color: var(--nav-drawer-bg);
+
+  /* Slide up/down using max-height trick */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar__drawer.is-open {
+  max-height: 30rem;         /* generous ceiling for all links */
+}
+
+/* Drawer link list */
+.navbar__drawer-links {
+  list-style: none;
+  margin: 0;
+  padding: 1rem clamp(1.25rem, 4vw, 3rem) 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.navbar__drawer-link {
+  display: block;
+  padding: 0.9rem 0;
+  font-family: var(--nav-body-font);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nav-drawer-text);
+
+  /* Bottom separator line */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: padding-left 0.2s ease, color 0.2s ease;
+}
+
+.navbar__drawer-link:last-of-type {
+  border-bottom: none;
+}
+
+.navbar__drawer-link:hover {
+  padding-left: 0.5rem;
+  color: #000;
+}
+
+/* Contact CTA inside drawer — full-width pill button */
+.navbar__drawer-cta {
+  display: block;
+  margin-top: 1.25rem;
+  padding: 0.85rem;
+  text-align: center;
+  border-radius: 999px;
+
+  background-color: var(--nav-cta-bg-transparent);
+  color:            var(--nav-cta-text-transparent);
+
+  font-family: var(--nav-font);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.navbar__drawer-cta:hover {
+  opacity: 0.85;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. RESPONSIVE — Tablet / Mobile  (≤ 768px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Hide desktop links */
+  .navbar__links {
+    display: none;
+  }
+
+  /* Hide desktop CTA — it's repeated in the drawer */
+  .navbar__cta {
+    display: none;
+  }
+
+  /* Show hamburger button */
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  /* When drawer is open, make navbar background solid
+     regardless of scroll position so the drawer is readable */
+  .navbar.menu-open {
+    background-color: var(--nav-bg-solid);
+    color:            var(--nav-text-solid);
+  }
+
+  .navbar.menu-open .navbar__hamburger-bar {
+    background-color: var(--nav-text-solid);
+  }
+
+  .navbar.menu-open .navbar__logo-img {
+    filter: var(--nav-logo-filter-solid);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. ACCESSIBILITY — reduce motion preference
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar__link::after,
+  .navbar__cta,
+  .navbar__hamburger-bar,
+  .navbar__drawer,
+  .navbar__logo {
+    transition: none !important;
+    animation: none !important;
+  }
+}
