@@ -26,7 +26,7 @@
 
   /* Spacing */
   --hero-padding-x: clamp(1.5rem, 5vw, 5rem);
-  --hero-padding-y: clamp(3rem, 8vh, 7rem);
+  --hero-padding-y: clamp(3rem, 8dvh, 7rem);
 
   /* Layout */
   --hero-gap: clamp(2rem, 6vw, 6rem);
@@ -47,7 +47,7 @@
 .first {
   position: relative;          /* anchors the absolute children   */
   width: 100%;
-  height: 100vh;               /* full screen                      */
+  height: 100dvh;               /* full screen                      */
   overflow: hidden;            /* video never bleeds outside       */
 
   /* Flex to centre text vertically and horizontally */
@@ -159,7 +159,7 @@
 .landing {
   padding-top: 2rem;
   background-color: var(--color-bg);
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -425,7 +425,7 @@
 
   .hero__phone-frame {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     margin-top: -2rem; /* Offsets the .hero padding-top */
@@ -740,7 +740,7 @@
 /* ── Responsive — Tablet (≤ 768px) ──────────────────────────*/
 @media (max-width: 768px) {
   .services__accordions {
-    padding-bottom: 15vh;
+    padding-bottom: 2dvh;
   }
 
   .service-card {

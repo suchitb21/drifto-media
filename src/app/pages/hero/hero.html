@@ -12,11 +12,13 @@
   ─────────────────────────────────────────────────────────── -->
   <video
     class="first__bg-video"
-    autoplay
     muted
     loop
     playsinline
+    preload="none"
+    poster="/bg.webp"
     aria-hidden="true">
+
     <source src="/bg.webm" type="video/webm">
   </video>
 
@@ -73,11 +75,11 @@
       <div class="hero__phone-frame">
         <video
           class="hero__video"
-          autoplay
           loop
           muted
           playsinline
-          poster="tn.webp"
+          preload="none"
+          poster="/tn.webp"
         >
           <source src="/hero/hero.webm" type="video/webm">
           Your browser does not support the video tag.
@@ -88,22 +90,22 @@
 </section>
 
 <section class="stats-section-wrapper">
-<section class="stats-section">
-  <div class="stats-container">
-    <div class="stat-block" *ngFor="let stat of statsData">
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-block" *ngFor="let stat of statsData">
 
-      <div class="stat-block__number-wrap">
-        <span [countUp]="stat.value" [countUpOptions]="countUpOpts" class="stat-block__number">0</span>
-        <span class="stat-block__suffix">{{ stat.suffix }}</span>
+        <div class="stat-block__number-wrap">
+          <span class="stat-block__number" [attr.data-target]="stat.value">0</span>
+          <span class="stat-block__suffix">{{ stat.suffix }}</span>
+        </div>
+
+        <h3 class="stat-block__label">{{ stat.label }}</h3>
+
+        <p class="stat-block__description">{{ stat.description }}</p>
+
       </div>
-
-      <h3 class="stat-block__label">{{ stat.label }}</h3>
-
-      <p class="stat-block__description">{{ stat.description }}</p>
-
     </div>
-  </div>
-</section>
+  </section>
 </section>
 
 <!-- =============================================================

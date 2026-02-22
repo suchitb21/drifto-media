@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CountUpDirective } from 'ngx-countup';
 
 interface StatItem {
   value: number;
@@ -17,28 +16,61 @@ interface ServiceItem {
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, CountUpDirective],
+  imports: [CommonModule], // Removed CountUpDirective
   templateUrl: './hero.html',
   styleUrl: './hero.css'
 })
 export class Hero implements AfterViewInit {
 
-  // 1. Inject NgZone to protect performance
   constructor(private ngZone: NgZone) {}
 
   ngAfterViewInit(): void {
-    // 2. Run outside Angular to prevent CPU spikes and video stuttering
+    // Run outside Angular to prevent CPU spikes
     this.ngZone.runOutsideAngular(() => {
 
-      // --- 1. STATS FADE-UP OBSERVER ---
+      // --- 1. STATS FADE-UP & COUNTER OBSERVER ---
       const wrapperEl = document.querySelector('.stats-section-wrapper');
       const statsEl = document.querySelector('.stats-section');
+      const numberElements = document.querySelectorAll('.stat-block__number');
 
       if (wrapperEl && statsEl) {
         const statsObserver = new IntersectionObserver(
           ([entry]) => {
             if (entry.isIntersecting) {
               statsEl.classList.add('is-visible');
+
+              // Only run the counting animation ONCE when scrolled into view
+              if (!statsEl.classList.contains('has-counted')) {
+                statsEl.classList.add('has-counted');
+
+                const duration = 2500; // 2.5 seconds duration
+                
+                numberElements.forEach((el) => {
+                  const htmlEl = el as HTMLElement;
+                  const target = parseInt(htmlEl.getAttribute('data-target') || '0', 10);
+                  let startTimestamp: number | null = null;
+
+                  const step = (timestamp: number) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    
+                    // Ease-out equation for a smooth slow-down at the end
+                    const easeOut = 1 - Math.pow(1 - progress, 4); 
+                    const current = Math.floor(easeOut * target);
+
+                    // Update the DOM directly, bypassing Angular entirely
+                    htmlEl.innerText = current.toString();
+
+                    if (progress < 1) {
+                      window.requestAnimationFrame(step);
+                    } else {
+                      htmlEl.innerText = target.toString(); // Ensure exact final number
+                    }
+                  };
+
+                  window.requestAnimationFrame(step);
+                });
+              }
             } else {
               statsEl.classList.remove('is-visible');
             }
@@ -48,22 +80,43 @@ export class Hero implements AfterViewInit {
         statsObserver.observe(wrapperEl);
       }
 
-      // --- 2. VIDEO ANTI-FREEZE OBSERVER ---
-      // Fixes the issue where browsers pause off-screen videos and forget to resume them
+// --- 2. VIDEO ANTI-FREEZE OBSERVER ---
       const videos = document.querySelectorAll('video');
       const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const video = entry.target as HTMLVideoElement;
           
           if (entry.isIntersecting) {
-            // Force play when the video enters the screen
-            video.play().catch(e => console.log('Autoplay prevented by browser:', e));
+            // 1. Force the DOM properties to prove to the browser it is silent
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+
+            // 2. Attempt to play and catch the promise
+            const playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+              playPromise.catch(error => {
+                // 3. THE FALLBACK: If the browser blocks it on page load, 
+                // instantly start the video the second they scroll or click.
+                const forcePlay = () => {
+                  video.play();
+                  // Clean up listeners once it successfully starts
+                  window.removeEventListener('scroll', forcePlay);
+                  window.removeEventListener('click', forcePlay);
+                  window.removeEventListener('touchstart', forcePlay);
+                };
+                
+                window.addEventListener('scroll', forcePlay, { passive: true });
+                window.addEventListener('click', forcePlay, { passive: true });
+                window.addEventListener('touchstart', forcePlay, { passive: true });
+              });
+            }
           } else {
-            // Be a good citizen and pause it when hidden to save battery/CPU
             video.pause(); 
           }
         });
-      }, { threshold: 0.05 }); // Triggers when just 5% of the video is visible
+      }, { threshold: 0.05 });
 
       videos.forEach(v => videoObserver.observe(v));
 
@@ -71,13 +124,6 @@ export class Hero implements AfterViewInit {
   }
 
   // --- COMPONENT DATA ---
-  
-  countUpOpts = {
-    duration: 2.5,
-    separator: ',',
-    enableScrollSpy: true,
-    scrollSpyDelay: 300,
-  };
 
   statsData: StatItem[] = [
     {

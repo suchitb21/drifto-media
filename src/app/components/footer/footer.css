@@ -1,0 +1,345 @@
+/* =============================================================
+   FOOTER COMPONENT STYLES
+   Angular standalone component — scoped via :host
+   All tokens in :host for easy theming
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS  ← modify here to retheme
+   ───────────────────────────────────────────────────────────── */
+:host {
+  /* Colours */
+  --footer-bg:            #000000;       /* main background              */
+  --footer-accent:        #ff6105;       /* orange accent                */
+  --footer-text-primary:  #fff5dc;       /* warm beige — headings + links*/
+  --footer-text-muted:    rgba(255, 245, 220, 0.55); /* dimmer body text */
+  --footer-border:        #ff6105;       /* top / bottom border line     */
+  --footer-social-bg:     #ff6105;       /* social icon pill bg          */
+  --footer-social-icon:   #000000;       /* social icon colour           */
+  --footer-divider:       rgba(255, 97, 5, 0.15); /* internal dividers   */
+
+  /* Typography */
+  --footer-font-head:     'Anton', Arial, sans-serif;
+  --footer-font-body:     'Outfit', Arial, sans-serif;
+
+  display: block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. FOOTER SHELL
+   ───────────────────────────────────────────────────────────── */
+.footer {
+  background-color: var(--footer-bg);
+  width: 100%;
+  position: relative;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. TOP + BOTTOM ACCENT BORDERS
+   ───────────────────────────────────────────────────────────── */
+.footer__top-border,
+.footer__bottom-border {
+  height: 3px;
+  background-color: var(--footer-border);
+  width: 100%;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. INNER GRID LAYOUT
+      Three columns: brand | links | contact
+      Collapses on mobile
+   ───────────────────────────────────────────────────────────── */
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.4fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. SHARED COLUMN STYLES
+   ───────────────────────────────────────────────────────────── */
+
+/* Column heading — "Quick Links", "Contact Us" */
+.footer__col-heading {
+  font-family: var(--footer-font-head);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 400;           /* Anton looks bold at 400 */
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--footer-text-primary);
+  margin: 0 0 1.25rem;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. COLUMN 1 — Brand / Logo / Socials
+   ───────────────────────────────────────────────────────────── */
+.footer__col--brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Logo image */
+.footer__logo-link {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  align-self: flex-start;
+}
+
+.footer__logo-link:hover {
+  transform: scale(1.05);
+}
+
+.footer__logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 50%;         /* circular logo frame to match reference */
+}
+
+/* Remote tagline */
+.footer__tagline {
+  font-family: var(--footer-font-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--footer-text-muted);
+  margin: 0;
+}
+
+.footer__tagline-accent {
+  color: var(--footer-accent);
+  font-weight: 600;
+}
+
+/* Social icons row */
+.footer__socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Individual social pill button */
+.footer__social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;       /* rounded square — matches reference */
+
+  background-color: var(--footer-social-bg);
+  color: var(--footer-social-icon);
+
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.footer__social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 97, 5, 0.35);
+  background-color: #e05500;  /* slightly darker orange on hover */
+}
+
+.footer__social-btn svg {
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. COLUMN 2 — Quick Links
+   ───────────────────────────────────────────────────────────── */
+.footer__link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer__link {
+  font-family: var(--footer-font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--footer-text-muted);
+  text-decoration: none;
+
+  /* Subtle left-nudge on hover */
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer__link:hover {
+  color: var(--footer-accent);
+  transform: translateX(4px);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. COLUMN 3 — Contact
+   ───────────────────────────────────────────────────────────── */
+
+/* "Fully remote" note */
+.footer__remote-note {
+  font-family: var(--footer-font-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--footer-text-muted);
+  margin: 0 0 1rem;
+}
+
+/* Contact list */
+.footer__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Individual contact row: icon + text */
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+/* Icon in orange circle */
+.footer__contact-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgba(255, 97, 5, 0.12); /* subtle orange tint */
+  color: var(--footer-accent);
+  margin-top: 1px;
+}
+
+/* Text wrapper (subtext + main link stacked) */
+.footer__contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+/* Small label above the email e.g. "For job applications" */
+.footer__contact-subtext {
+  font-family: var(--footer-font-body);
+  font-size: 0.75rem;
+  color: var(--footer-text-muted);
+  font-weight: 400;
+}
+
+/* Clickable email link */
+.footer__contact-link {
+  font-family: var(--footer-font-body);
+  font-size: 0.9rem;
+  color: var(--footer-text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__contact-link:hover {
+  color: var(--footer-accent);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. BOTTOM BAR — Copyright
+   ───────────────────────────────────────────────────────────── */
+.footer__bottom {
+  border-top: 1px solid var(--footer-divider);
+  padding: 1rem clamp(1.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.footer__copyright {
+  font-family: var(--footer-font-body);
+  font-size: 0.8rem;
+  color: var(--footer-text-muted);
+  margin: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. RESPONSIVE — Tablet (≤ 768px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer__inner {
+    /* Brand takes full width on top, links + contact side by side */
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'brand brand'
+      'links contact';
+  }
+
+  .footer__col--brand  { grid-area: brand;   }
+  .footer__col--links  { grid-area: links;   }
+  .footer__col--contact { grid-area: contact; }
+
+  .footer__logo {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. RESPONSIVE — Mobile (≤ 480px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .footer__inner {
+    /* Full single column stack */
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'brand'
+      'links'
+      'contact';
+    gap: 2rem;
+  }
+
+  .footer__col--brand {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__socials {
+    justify-content: center;
+  }
+
+  .footer__tagline {
+    text-align: center;
+  }
+
+  .footer__link:hover {
+    transform: none; /* disable nudge on touch */
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. ACCESSIBILITY — reduce motion
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .footer__social-btn,
+  .footer__logo-link,
+  .footer__link,
+  .footer__contact-link {
+    transition: none !important;
+  }
+}
