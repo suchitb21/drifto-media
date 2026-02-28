@@ -131,7 +131,7 @@
               class="footer__contact-link">
               {{ contact.text }}
             </a>
-            <span *ngIf="!contact.href">{{ contact.text }}</span>
+            <span *ngIf="!contact.href" class="footer_contact_number">{{ contact.text }}</span>
           </span>
 
         </li>

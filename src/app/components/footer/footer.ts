@@ -49,25 +49,24 @@ export class Footer {
   contacts: ContactItem[] = [
     {
       icon: 'phone',
-      text: 'hello@yourbrand.com',
-      href: 'mailto:hello@yourbrand.com'
+      text: '+91 93218 76981',
+      subtext: 'Rakesh Bhatia'
     },
     {
       icon: 'phone',
-      text: 'business@yourbrand.com',
-      href: 'mailto:business@yourbrand.com'
+      text: '+91 99678 04231',
+      subtext: 'Hiten Kundaliya'
     },
     {
       icon: 'phone',
-      text: 'careers@yourbrand.com',
-      href: 'mailto:careers@yourbrand.com',
-      subtext: 'For job applications'
+      text: '+91 90043 65297',
+      subtext: 'Yuvraj Thadani'
     },
     {
       icon: 'email',
-      text: 'careers@yourbrand.com',
-      href: 'mailto:careers@yourbrand.com',
-      subtext: 'For job applications'
+      text: 'driftomedia@gmail.com',
+      href: 'mailto:driftomedia@gmail.com',
+      subtext: 'For enquiries: '
     },
   ];
 

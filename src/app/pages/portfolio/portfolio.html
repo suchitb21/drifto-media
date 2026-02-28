@@ -1,0 +1,207 @@
+<!-- =============================================================
+     PORTFOLIO COMPONENT
+     Infinite CSS Marquee — no JavaScript during scroll.
+     How it works:
+       Each strip renders the slide array TWICE in a flex row.
+       A CSS @keyframes moves the track left by 50% of its width
+       then snaps back to 0. Because the second half is identical
+       to the first, the snap is invisible — pure infinite loop.
+       GPU compositing via transform: translateX — 60fps always.
+     [hidden] on panels keeps all three tracks in the DOM so
+     switching tabs never causes a layout recalculation.
+     ============================================================= -->
+
+<section class="portfolio">
+
+  <!-- ── SECTION HEADING ────────────────────────────────────── -->
+  <div class="portfolio__header">
+    <h2 class="portfolio__title">Our <em>Portfolio</em></h2>
+    <p class="portfolio__subtitle">
+      Three years of storytelling — every frame, on purpose.
+    </p>
+  </div>
+
+  <!-- ── TAB SWITCHER ───────────────────────────────────────── -->
+  <div class="portfolio__tabs" role="tablist" aria-label="Portfolio categories">
+    <button
+      *ngFor="let tab of tabs"
+      class="portfolio__tab"
+      [class.portfolio__tab--active]="activeTab === tab.key"
+      (click)="setTab(tab.key)"
+      role="tab"
+      [attr.aria-selected]="activeTab === tab.key">
+      {{ tab.label }}
+    </button>
+  </div>
+
+  <!-- ==========================================================
+       PANEL 1 — REELS  (portrait 9:16)
+       [hidden] keeps this in the DOM — no reflow on tab switch
+       ========================================================== -->
+  <div class="portfolio__panel" [hidden]="activeTab !== 'reels'">
+    <!-- The viewport clips the overflowing track -->
+    <div class="portfolio__viewport">
+      <!--
+        .portfolio__track is the moving flex row.
+        It contains the slides array rendered TWICE.
+        CSS animation scrolls it left by 50% then snaps back.
+      -->
+      <div class="portfolio__track portfolio__track--reels">
+
+        <!-- Set A — original -->
+        <div
+          *ngFor="let slide of reels"
+          class="portfolio__slide portfolio__slide--portrait"
+          (click)="openLink(slide.link)"
+          role="button"
+          [attr.aria-label]="slide.heading">
+          <img [src]="slide.thumb" [alt]="slide.alt"
+               class="portfolio__thumb" loading="lazy" decoding="async"/>
+          <div class="portfolio__play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <div class="portfolio__caption">
+            <span class="portfolio__caption-text">{{ slide.heading }}</span>
+            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+        <!-- Set B — exact duplicate for seamless wrap -->
+        <div
+          *ngFor="let slide of reels"
+          class="portfolio__slide portfolio__slide--portrait"
+          (click)="openLink(slide.link)"
+          aria-hidden="true">
+          <img [src]="slide.thumb" [alt]="slide.alt"
+               class="portfolio__thumb" loading="lazy" decoding="async"/>
+          <div class="portfolio__play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <div class="portfolio__caption">
+            <span class="portfolio__caption-text">{{ slide.heading }}</span>
+            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- /track reels -->
+    </div>
+  </div>
+  <!-- /panel reels -->
+
+
+  <!-- ==========================================================
+       PANEL 2 — SOCIAL MEDIA CREATIVES  (square 1:1)
+       ========================================================== -->
+  <div class="portfolio__panel" [hidden]="activeTab !== 'social'">
+    <div class="portfolio__viewport">
+      <div class="portfolio__track portfolio__track--social">
+
+        <!-- Set A -->
+        <div
+          *ngFor="let slide of social"
+          class="portfolio__slide portfolio__slide--square"
+          (click)="openLink(slide.link)"
+          role="button"
+          [attr.aria-label]="slide.heading">
+          <img [src]="slide.thumb" [alt]="slide.alt"
+               class="portfolio__thumb" loading="lazy" decoding="async"/>
+          <div class="portfolio__play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" width="30" height="30">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15,3 21,3 21,9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </div>
+          <div class="portfolio__caption">
+            <span class="portfolio__caption-text">{{ slide.heading }}</span>
+            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+        <!-- Set B — duplicate -->
+        <div
+          *ngFor="let slide of social"
+          class="portfolio__slide portfolio__slide--square"
+          (click)="openLink(slide.link)"
+          aria-hidden="true">
+          <img [src]="slide.thumb" [alt]="slide.alt"
+               class="portfolio__thumb" loading="lazy" decoding="async"/>
+          <div class="portfolio__play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" width="30" height="30">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15,3 21,3 21,9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </div>
+          <div class="portfolio__caption">
+            <span class="portfolio__caption-text">{{ slide.heading }}</span>
+            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /panel social -->
+
+
+  <!-- ==========================================================
+       PANEL 3 — LONG FORM PRODUCTION  (landscape 16:9)
+       ========================================================== -->
+  <div class="portfolio__panel" [hidden]="activeTab !== 'longform'">
+    <div class="portfolio__viewport">
+      <div class="portfolio__track portfolio__track--longform">
+
+        <!-- Set A -->
+        <div
+          *ngFor="let slide of longform"
+          class="portfolio__slide portfolio__slide--landscape"
+          (click)="openLink(slide.link)"
+          role="button"
+          [attr.aria-label]="slide.heading">
+          <img [src]="slide.thumb" [alt]="slide.alt"
+               class="portfolio__thumb" loading="lazy" decoding="async"/>
+          <div class="portfolio__play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="44" height="44">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <div class="portfolio__caption">
+            <span class="portfolio__caption-text">{{ slide.heading }}</span>
+            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+        <!-- Set B — duplicate -->
+        <div
+          *ngFor="let slide of longform"
+          class="portfolio__slide portfolio__slide--landscape"
+          (click)="openLink(slide.link)"
+          aria-hidden="true">
+          <img [src]="slide.thumb" [alt]="slide.alt"
+               class="portfolio__thumb" loading="lazy" decoding="async"/>
+          <div class="portfolio__play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="44" height="44">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <div class="portfolio__caption">
+            <span class="portfolio__caption-text">{{ slide.heading }}</span>
+            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /panel longform -->
+
+</section>
+<!-- /portfolio -->

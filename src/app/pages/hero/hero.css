@@ -695,11 +695,11 @@
 }
 
 .service-card--dark .service-card__title {
-  color: #ff6105;
+  color: #fff5dc;
 }
 
 .service-card--dark .service-card__text {
-  color: rgba(255, 97, 5, 0.75);  /* softer orange for body */
+  color: #fff5dc; 
 }
 
 /* ── Card variant: orange (orange bg, black text) ─────────── */
@@ -708,13 +708,12 @@
 }
 
 .service-card--orange .service-card__title {
-  color: #000000;
+  color: #fff5dc;
 }
 
 .service-card--orange .service-card__text {
-  color: rgba(0, 0, 0, 0.7);  /* softer black for body */
+  color: #fff5dc; 
 }
-
 /* ── Card title ──────────────────────────────────────────────*/
 .service-card__title {
   font-family: 'Anton', Arial, sans-serif;
@@ -740,7 +739,7 @@
 /* ── Responsive — Tablet (≤ 768px) ──────────────────────────*/
 @media (max-width: 768px) {
   .services__accordions {
-    padding-bottom: 2dvh;
+    padding-bottom: 0d;
   }
 
   .service-card {
