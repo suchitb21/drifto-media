@@ -1,1 +1,104 @@
-<p>about works!</p>
+<!-- =============================================================
+     ABOUT COMPONENT
+     Three founder cards driven from founders[] in about.ts.
+     Background: #fff5dc  |  Cards: #ff6105
+     ============================================================= -->
+
+<section class="about">
+
+  <!-- ── SECTION HEADER ───────────────────────────────────────── -->
+  <div class="about__header">
+    <p class="about__eyebrow">The people behind the work</p>
+    <h2 class="about__title">Meet the <em>Founders</em></h2>
+    <p class="about__subtitle">
+      A small team with a big obsession — making brands impossible to ignore.
+    </p>
+  </div>
+
+  <!-- ── FOUNDER CARDS ────────────────────────────────────────── -->
+  <!-- Driven from founders[] in about.ts via *ngFor              -->
+  <div class="about__grid">
+
+    <article
+      class="founder-card"
+      *ngFor="let founder of founders; let i = index" >
+      <!--
+        founder-card--lead (index 0 = Founder) gets a slightly
+        taller image and can be targeted separately in CSS
+        to visually distinguish seniority.
+      -->
+
+      <!-- ── Photo ──────────────────────────────────────────── -->
+      <div class="founder-card__image-wrap">
+        <img
+          [src]="founder.image"
+          [alt]="founder.name + ' · ' + founder.role"
+          class="founder-card__image"
+          loading="lazy"
+          decoding="async" />
+        <!-- Hover tint -->
+        <div class="founder-card__image-overlay" aria-hidden="true"></div>
+      </div>
+
+      <!-- ── Info Body ──────────────────────────────────────── -->
+      <div class="founder-card__body">
+
+        <!-- Role pill badge -->
+        <span class="founder-card__badge">{{ founder.role }}</span>
+
+        <!-- Name -->
+        <h3 class="founder-card__name">{{ founder.name }}</h3>
+
+        <!-- Department / Speciality -->
+        <p class="founder-card__dept">{{ founder.department }}</p>
+
+        <!-- Bio blurb -->
+        <p class="founder-card__bio">{{ founder.bio }}</p>
+
+        <!-- Social icon row -->
+        <div class="founder-card__socials" aria-label="Social links">
+
+          <a
+            *ngIf="founder.socials.instagram"
+            [href]="founder.socials.instagram"
+            class="founder-card__social-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+          </a>
+
+          <a
+            *ngIf="founder.socials.linkedin"
+            [href]="founder.socials.linkedin"
+            class="founder-card__social-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect width="4" height="12" x="2" y="9"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+
+        </div>
+        <!-- /socials -->
+
+      </div>
+      <!-- /founder-card__body -->
+
+    </article>
+
+  </div>
+  <!-- /about__grid -->
+
+</section>

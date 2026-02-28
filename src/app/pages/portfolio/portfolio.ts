@@ -73,12 +73,14 @@ export class Portfolio {
 
   // Square 1:1 — Social Media Creatives
   social: Slide[] = [
-    { thumb: 'https://picsum.photos/seed/s1/600/600', heading: 'Campaign Grid — Adidas',    link: 'https://instagram.com', alt: 'Adidas social' },
-    { thumb: 'https://picsum.photos/seed/s2/600/600', heading: 'Product Carousel — Zara',   link: 'https://instagram.com', alt: 'Zara social' },
-    { thumb: 'https://picsum.photos/seed/s3/600/600', heading: 'Story Series — Swiggy',     link: 'https://instagram.com', alt: 'Swiggy social' },
-    { thumb: 'https://picsum.photos/seed/s4/600/600', heading: 'Meme Campaign — Netflix',   link: 'https://instagram.com', alt: 'Netflix social' },
-    { thumb: 'https://picsum.photos/seed/s5/600/600', heading: 'UGC Strategy — boAt',       link: 'https://instagram.com', alt: 'boAt social' },
-    { thumb: 'https://picsum.photos/seed/s6/600/600', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
+    { thumb: 'graphics/1.webp', heading: 'Campaign Grid — Adidas',    link: 'https://instagram.com', alt: 'Adidas social' },
+    { thumb: 'graphics/2.webp', heading: 'Product Carousel — Zara',   link: 'https://instagram.com', alt: 'Zara social' },
+    { thumb: 'graphics/3.webp', heading: 'Story Series — Swiggy',     link: 'https://instagram.com', alt: 'Swiggy social' },
+    { thumb: 'graphics/4.webp', heading: 'Meme Campaign — Netflix',   link: 'https://instagram.com', alt: 'Netflix social' },
+    { thumb: 'graphics/5.webp', heading: 'UGC Strategy — boAt',       link: 'https://instagram.com', alt: 'boAt social' },
+    { thumb: 'graphics/6.webp', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
+    { thumb: 'graphics/7.webp', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
+    { thumb: 'graphics/8.webp', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
   ];
 
   // Landscape 16:9 — Long Form

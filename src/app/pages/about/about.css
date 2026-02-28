@@ -1,0 +1,312 @@
+/* =============================================================
+   ABOUT COMPONENT STYLES
+   Angular standalone — scoped via :host
+   All design tokens in :host for easy theming.
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS  ← only modify here to retheme
+   ───────────────────────────────────────────────────────────── */
+:host {
+  /* Colours */
+  --ab-bg:              #fff5dc;             /* beige section bg           */
+  --ab-card-bg:         #ff6105;             /* orange card bg             */
+  --ab-accent:          #ff6105;             /* orange accent              */
+  --ab-black:           #000000;             /* headings + badge bg        */
+  --ab-text-on-card:    #fff5dc;             /* text that sits on orange   */
+  --ab-text-muted:      rgba(0,0,0,0.50);   /* subtitle, dept label       */
+  --ab-bio-color:       #fff5dc;            /* bio paragraph              */
+  --ab-badge-bg:        #000000;             /* role pill bg               */
+  --ab-badge-txt:       #ff6105;             /* role pill text             */
+  --ab-social-bg:       #fff5dc;             /* social icon square bg      */
+  --ab-social-icon:     #ff6105;             /* social icon colour         */
+  --ab-hover-overlay:   rgba(0,0,0,0.12);   /* image tint on hover        */
+  --ab-card-shadow:     rgba(255,97,5,0.18); /* card drop shadow           */
+  --ab-card-shadow-hover: rgba(255,97,5,0.32);
+
+  /* Typography */
+  --ab-font-head: 'Anton', Arial, sans-serif;
+  --ab-font-body: 'Outfit', Arial, sans-serif;
+
+  /* Spacing */
+  --ab-pad-y: clamp(5.5rem, 10vw, 8rem);
+  --ab-pad-x: clamp(1.5rem, 6vw, 5rem);
+
+  display: block;
+}
+
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. SECTION WRAPPER
+   ───────────────────────────────────────────────────────────── */
+.about {
+  background-color: var(--ab-bg);
+  width: 100%;
+  padding: var(--ab-pad-y) 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. HEADER
+   ───────────────────────────────────────────────────────────── */
+.about__header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+}
+
+/* Small orange eyebrow above the title */
+.about__eyebrow {
+  font-family: var(--ab-font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ab-accent);
+  margin: 0 0 0.6rem;
+}
+
+/* Main heading */
+.about__title {
+  font-family: var(--ab-font-head);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ab-black);
+  margin: 0 0 0.9rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+/* "Founders" in italic serif — matches site-wide em style */
+.about__title em {
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--ab-accent);
+  text-transform: none;
+}
+
+.about__subtitle {
+  font-family: var(--ab-font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--ab-text-muted);
+  margin: 0;
+  line-height: 1.7;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. GRID — 3 equal columns on desktop
+   ───────────────────────────────────────────────────────────── */
+.about__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. FOUNDER CARD — base
+   ───────────────────────────────────────────────────────────── */
+.founder-card {
+  background-color: var(--ab-card-bg);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 8px 36px var(--ab-card-shadow);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease;
+}
+
+.founder-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 28px 60px var(--ab-card-shadow-hover);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. PHOTO
+   ───────────────────────────────────────────────────────────── */
+.founder-card__image-wrap {
+  position: relative;
+  width: 100%;
+  height: 310px;               /* co-founder default height       */
+  overflow: hidden;
+}
+
+
+
+.founder-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* keeps faces in frame            */
+  transition: transform 0.5s ease;
+}
+
+.founder-card:hover .founder-card__image {
+  transform: scale(1.07);
+}
+
+/* Subtle dark tint that fades in on hover */
+.founder-card__image-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ab-hover-overlay);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.founder-card:hover .founder-card__image-overlay {
+  opacity: 1;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. CARD BODY
+   ───────────────────────────────────────────────────────────── */
+.founder-card__body {
+  padding: 1.6rem 1.9rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+
+/* ── Role badge pill ────────────────────────────────────────── */
+.founder-card__badge {
+  display: inline-block;
+  align-self: flex-start;
+
+  background-color: var(--ab-badge-bg);
+  color: var(--ab-badge-txt);
+
+  font-family: var(--ab-font-head);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  padding: 0.22rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 0.4rem;
+}
+
+
+/* ── Name ───────────────────────────────────────────────────── */
+.founder-card__name {
+  font-family: var(--ab-font-head);
+  font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ab-text-on-card);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+
+/* ── Department ─────────────────────────────────────────────── */
+.founder-card__dept {
+  font-family: var(--ab-font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+
+/* ── Bio blurb ──────────────────────────────────────────────── */
+.founder-card__bio {
+  font-family: var(--ab-font-body);
+  font-size: clamp(0.875rem, 1.2vw, 0.95rem);
+  line-height: 1.7;
+  color: var(--ab-bio-color);
+  margin: 0.55rem 0 0.75rem;
+}
+
+
+/* ── Social icons row ───────────────────────────────────────── */
+.founder-card__socials {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 0.2rem;
+}
+
+.founder-card__social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.55rem;
+
+  background-color: var(--ab-social-bg);
+  color: var(--ab-social-icon);
+  text-decoration: none;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.founder-card__social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+.founder-card__social-btn svg {
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. RESPONSIVE — Tablet (≤ 900px)
+   Lead card goes full-width in landscape, co-founders 50/50
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. RESPONSIVE — Mobile (≤ 600px)
+   All cards single column, lead reverts to stacked layout
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    padding: 0 clamp(1rem, 5vw, 1.5rem); /* ← add this line */
+  }
+
+  .founder-card__image-wrap {
+    height: 260px;
+  }
+
+  .founder-card__body {
+    padding: 1.3rem 1.5rem 1.6rem;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. ACCESSIBILITY — reduce motion
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .founder-card,
+  .founder-card__image,
+  .founder-card__image-overlay,
+  .founder-card__social-btn {
+    transition: none !important;
+  }
+}

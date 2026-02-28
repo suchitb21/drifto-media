@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.wg {
+  width: 100%;
+  min-height: 100vh;
+
+  background-image: url('/wg.webp');
+  background-size: cover;
+  background-position: center bottom; /* anchors the peacock/flowers to the bottom */
+  background-repeat: no-repeat;
+
+  /* Warm beige tint blended over the image so it feels like #fff5dc */
+  background-color: #fff5dc;
+  background-blend-mode: luminosity;  /* desaturates + tints toward the beige */
+}
+
+/* ── Responsive — ensure it always fills on smaller screens ── */
+@media (max-width: 768px) {
+  .wg {
+    min-height: 60vw;              /* proportional height on tablet  */
+    background-position: center bottom;
+  }
+}
+
+@media (max-width: 480px) {
+  .wg {
+    min-height: 80vw;              /* taller ratio on mobile         */
+    background-position: center bottom;
+  }
+}
