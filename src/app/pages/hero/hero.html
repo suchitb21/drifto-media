@@ -1,0 +1,158 @@
+<!-- =============================================================
+     FIRST SECTION — Full-screen video background tagline
+     Sits above .landing on the home page.
+     Video source: /public/bg.webm
+     ============================================================= -->
+<section class="first">
+
+  <!-- ── VIDEO BACKGROUND ─────────────────────────────────────
+       autoplay + muted + loop + playsinline required for
+       browsers to autoplay without user interaction.
+       poster is shown while the video loads.
+  ─────────────────────────────────────────────────────────── -->
+  <video
+    class="first__bg-video"
+    muted
+    loop
+    playsinline
+    preload="none"
+    poster="/bg.webp"
+    aria-hidden="true">
+
+    <source src="/bg.webm" type="video/webm">
+  </video>
+
+  <!-- ── DARK OVERLAY ─────────────────────────────────────────
+       Semi-transparent layer over the video so text is legible
+  ─────────────────────────────────────────────────────────── -->
+  <div class="first__overlay" aria-hidden="true"></div>
+
+  <!-- ── TAGLINE COPY ─────────────────────────────────────────
+       Two lines, each spanning full width, centred vertically.
+       Line 1: warm beige  (#fff5dc)
+       Line 2: orange      (#ff6105)
+  ─────────────────────────────────────────────────────────── -->
+  <div class="first__content">
+
+    <!-- Line 1 -->
+    <p class="first__line first__line--primary">
+      YOUR BRAND'S NOT BORING
+    </p>
+
+    <!-- Line 2 -->
+    <p class="first__line first__line--accent">
+      LET'S PROVE IT
+    </p>
+
+  </div>
+  <!-- /first__content -->
+
+</section>
+<!-- /first -->
+
+
+<section class="landing">
+  <div class="hero">
+    <div class="hero__content">
+
+      <h1 class="hero__headline">
+        Your Brand Is Not Boring
+        <span class="hero__headline-accent">Let's Prove It.</span>
+      </h1>
+
+      <p class="hero__subtext">
+        I craft engaging, high-quality videos that capture attention and tell your story.
+        Let’s turn your raw footage into a masterpiece.
+      </p>
+
+      <a href="#contact" class="hero__cta" (click)="scrollToContact($event)">
+        Book a Call
+      </a>
+
+    </div>
+
+    <div class="hero__media">
+      <div class="hero__phone-frame">
+        <video
+          class="hero__video"
+          loop
+          muted
+          playsinline
+          preload="none"
+          poster="/tn.webp"
+        >
+          <source src="/hero/hero.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section-wrapper">
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-block" *ngFor="let stat of statsData">
+
+        <div class="stat-block__number-wrap">
+          <span class="stat-block__number" [attr.data-target]="stat.value">0</span>
+          <span class="stat-block__suffix">{{ stat.suffix }}</span>
+        </div>
+
+        <h3 class="stat-block__label">{{ stat.label }}</h3>
+
+        <p class="stat-block__description">{{ stat.description }}</p>
+
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- =============================================================
+     SERVICES SECTION
+     GSAP ScrollTrigger accordion — cards collapse as you scroll.
+     "OUR SERVICES" heading stays sticky above the pinned cards.
+     Data driven from servicesData[] in hero.ts
+     ============================================================= -->
+<section class="services-section">
+
+  <!-- ── STICKY HEADING ───────────────────────────────────────
+       Stays visible at the top of the section at all times.
+       Position sticky keeps it above the pinned card stack.
+  ──────────────────────────────────────────────────────────── -->
+  <div class="services__heading-wrap">
+    <h2 class="services__heading">
+      Our <em>Services</em>
+    </h2>
+  </div>
+
+  <!-- ── CARDS CONTAINER (GSAP pins this) ─────────────────────
+       ScrollTrigger targets .services__accordions.
+       Do not remove this class — GSAP depends on it.
+  ──────────────────────────────────────────────────────────── -->
+  <div class="services__accordions">
+
+    <!-- Individual card — rendered from servicesData[] -->
+    <!-- Odd/even classes set alternating bg colours via CSS -->
+    <div
+      class="service-card"
+      [class.service-card--dark]="i % 2 === 0"
+      [class.service-card--orange]="i % 2 !== 0"
+      *ngFor="let service of servicesData; let i = index">
+
+      <!-- Card title -->
+      <div class="service-card__title">{{ service.title }}</div>
+
+      <!-- Card description — this is what GSAP collapses -->
+      <div class="service-card__text">{{ service.description }}</div>
+
+    </div>
+    <!-- /service-card -->
+
+  </div>
+  <!-- /services__accordions -->
+
+</section>
+<!-- /services-section -->
+
+

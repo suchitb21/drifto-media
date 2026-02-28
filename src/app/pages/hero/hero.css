@@ -1,0 +1,760 @@
+/* =============================================================
+   HERO COMPONENT STYLES
+   Angular component — scoped via :host
+   All design tokens live in :host for easy modification
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS  (modify these to retheme the component)
+   ───────────────────────────────────────────────────────────── */
+:host {
+  /* Colours */
+  --color-bg:           #fff5dc;   /* warm beige background          */
+  --color-accent:       #ff6105;   /* primary accent (orange)         */
+  --color-text-primary: #ff6105;   /* main headline text              */
+  --color-text-secondary: #000000; /* subtext / body copy             */
+  --color-icon:         #000000;   /* social icon stroke colour       */
+  --color-cta-bg:       #ff6105;   /* CTA button background           */
+  --color-cta-text:     #fff5dc;   /* CTA button label                */
+  --color-badge-bg:     #000000;   /* floating badge background       */
+  --color-badge-icon:   #ffffff;   /* floating badge icon colour      */
+  --color-frame-border: #e8dfc8;   /* phone-frame border              */
+
+  /* Typography */
+  --font-hero: 'Anton', Arial, sans-serif;
+
+  /* Spacing */
+  --hero-padding-x: clamp(1.5rem, 5vw, 5rem);
+  --hero-padding-y: clamp(3rem, 8dvh, 7rem);
+
+  /* Layout */
+  --hero-gap: clamp(2rem, 6vw, 6rem);
+
+  display: block;
+}
+
+/* =============================================================
+   FIRST SECTION — Full-screen video background hero
+   Only .first carries the video background.
+   All other sections (.landing, .stats-section) are untouched.
+   ============================================================= */
+
+/* ── Container ───────────────────────────────────────────────
+   Full viewport height, stacking context for the video layer
+   and the text layer above it.
+──────────────────────────────────────────────────────────── */
+.first {
+  position: relative;          /* anchors the absolute children   */
+  width: 100%;
+  height: 100dvh;               /* full screen                      */
+  overflow: hidden;            /* video never bleeds outside       */
+
+  /* Flex to centre text vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Video Background ────────────────────────────────────────
+   Covers the full section like a background-image would.
+   object-fit: cover keeps aspect ratio and fills all edges.
+──────────────────────────────────────────────────────────── */
+.first__bg-video {
+  position: absolute;
+  inset: 0;                    /* top/right/bottom/left: 0        */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* fill without distorting         */
+  object-position: center;
+  z-index: 0;                  /* sits at the very back           */
+}
+
+/* ── Dark Overlay ────────────────────────────────────────────
+   Increases text contrast over busy video frames.
+   Adjust opacity (0.0 – 1.0) to taste.
+──────────────────────────────────────────────────────────── */
+.first__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55); /* 55 % dark veil       */
+  z-index: 1;
+}
+
+/* ── Content Wrapper ─────────────────────────────────────────
+   Sits above video (z-index 2) and centres the two text lines.
+──────────────────────────────────────────────────────────── */
+.first__content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;         /* horizontal centre               */
+  justify-content: center;     /* vertical centre (parent is vh)  */
+  gap: 0.25rem;                /* tight gap between lines         */
+
+  width: 100%;
+  padding: 0 0; /* safe horizontal padding   */
+  text-align: center;
+}
+
+/* ── Shared line styles ──────────────────────────────────────
+   Anton font matches the rest of the hero component.
+──────────────────────────────────────────────────────────── */
+.first__line {
+  font-family: 'Anton', Arial, sans-serif;
+  font-weight: 400;            /* Anton is visually heavy at 400  */
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 0;
+
+  /* Fluid type: grows from ~2.5rem on mobile to ~10vw on desktop */
+  font-size: clamp(2.5rem, 10vw, 9rem);
+
+
+}
+
+/* ── Line 1: warm beige ──────────────────────────────────────*/
+.first__line--primary {
+  color: #fff5dc;
+  text-shadow:
+    0 0 20px rgba(255, 245, 220, 0.4),
+    0 0 60px rgba(255, 245, 220, 0.1);
+}
+
+/* ── Line 2: orange accent ───────────────────────────────────*/
+.first__line--accent {
+  color: #ff6105;
+  font-size: clamp(2.5rem, 17vw, 19rem);
+  text-shadow:
+    0 0 20px rgba(255, 97, 5, 0.4),
+    0 0 60px rgba(255, 97, 5, 0.4);
+
+
+}
+
+/* ── Responsive — Tablet (≤ 768px) ──────────────────────────*/
+@media (max-width: 768px) {
+  .first__line {
+    font-size: clamp(2.5rem, 15vw, 5rem);
+  }
+}
+
+/* ── Responsive — Mobile (≤ 480px) ──────────────────────────*/
+@media (max-width: 480px) {
+  .first__line {
+    font-size: clamp(2rem, 17vw, 5rem);
+    letter-spacing: 0.01em;
+  }
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. SECTION WRAPPER  (.landing)
+      Acts as the outer shell for multi-section home page
+   ───────────────────────────────────────────────────────────── */
+.landing {
+  padding-top: 2rem;
+  background-color: var(--color-bg);
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. HERO LAYOUT GRID
+      Two-column layout: copy (left) | media (right)
+      Collapses to single column on mobile
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--hero-padding-y) var(--hero-padding-x);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--hero-gap);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. LEFT COLUMN — Content / Copy
+   ───────────────────────────────────────────────────────────── */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  /* Fade-in entrance animation */
+  animation: heroFadeUp 0.7s ease both;
+}
+
+
+/* ── 5a. Social Icons Row ─────────────────────────────────── */
+.hero__icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+
+  /* Accent yellow pill background */
+  background-color: var(--color-accent);
+  color: #fff5dc;
+
+  /* Smooth hover scale */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.hero__icon:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.hero__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  pointer-events: none;
+}
+
+
+/* ── 5b. Headline ─────────────────────────────────────────── */
+.hero__headline {
+  font-family: var(--font-hero);
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-weight: 400;           /* Anton is inherently bold-looking */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Italic "right" — stands out from the block caps */
+.hero__headline em {
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif; /* contrast serif italic */
+  text-transform: none;
+  font-weight: 700;
+  /* Accent underline */
+  position: relative;
+  color: var(--color-text-secondary);
+}
+
+.hero__headline em::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+}
+
+
+/* ── 5c. Subtext / Body Copy ──────────────────────────────── */
+.hero__subtext {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 42ch;
+  margin: 0;
+  font-family: var(--font-hero) ;
+}
+
+
+/* ── 5d. CTA Button ───────────────────────────────────────── */
+.hero__cta {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  border-radius: 999px;          /* fully pill-shaped */
+
+  background-color: var(--color-cta-bg);
+  color: var(--color-cta-text);
+
+  font-family: var(--font-hero);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  align-self: flex-start;        /* don't stretch full width */
+
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.hero__cta:hover {
+  background-color: var(--color-accent);
+  color: #fff5dc;
+  transform: translateY(-2px);
+}
+
+.hero__cta:active {
+  transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. RIGHT COLUMN — Media / Video
+   ───────────────────────────────────────────────────────────── */
+.hero__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Staggered entrance — slightly delayed vs. copy */
+  animation: heroFadeUp 0.7s 0.15s ease both;
+}
+
+
+/* ── 6a. Phone-style Frame ────────────────────────────────── */
+.hero__phone-frame {
+  position: relative;
+  width: min(340px, 90%);
+
+  background: #fff;
+  border: 2px solid var(--color-frame-border);
+  border-radius: 2.5rem;
+  overflow: visible;            /* allow badge to overflow */
+
+  /* Layered shadows for depth */
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 12px 40px rgba(0,0,0,0.12),
+    0 40px 80px rgba(0,0,0,0.08);
+}
+
+
+/* ── 6b. Video ────────────────────────────────────────────── */
+.hero__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;         /* portrait phone ratio  */
+  object-fit: cover;
+  border-radius: 2.4rem;        /* slightly inset from frame edge */
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. KEYFRAME ANIMATIONS
+   ───────────────────────────────────────────────────────────── */
+
+/* Entrance: fade up from below */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge idle float */
+@keyframes badgeFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0);    }
+  50%       { transform: translateX(-50%) translateY(-8px); }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. RESPONSIVE — Tablet  (≤ 900px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero__icons {
+    justify-content: center;
+  }
+
+  .hero__subtext {
+    max-width: 100%;
+  }
+
+  .hero__cta {
+    align-self: center;
+  }
+
+  .hero__headline em::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. RESPONSIVE — Mobile  (≤ 600px)
+      VIDEO appears FIRST (top of stack) on small screens
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .landing {
+    align-items: flex-start;
+    padding-top: 0rem;
+  }
+
+  .hero {
+    padding-top: 2rem;
+    gap: 2.5rem;
+  }
+
+  /* Reorder: media (video) goes first */
+  .hero__media  { order: -1; }
+  .hero__content { order:  1; }
+
+  .hero__phone-frame {
+    width: 100vw;
+    height: 100dvh;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-top: -2rem; /* Offsets the .hero padding-top */
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+/* Force video to fill the new full-screen frame */
+  .hero__video {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    aspect-ratio: auto; /* Overrides the 9/16 ratio to prevent letterboxing */
+  }
+
+  .hero__headline {
+    font-size: clamp(2.4rem, 11vw, 3.5rem);
+  }
+}
+
+/* ... keep all previous CSS above this line ... */
+
+/* =============================================================
+   NEW SECTION: STATS BAR (Black Background)
+   ============================================================= */
+
+/* In hero.css — add this wrapper around the stats section */
+.stats-section-wrapper {
+  overflow: hidden;          /* clips the translateY gap */
+  background-color: #000000; /* always matches the section inside */
+}
+
+.stats-section {
+  width: 100%;
+  background-color: #000000; /* Pure black background */
+  color: #fff5dc; /* Warm beige text color */
+  padding: 5rem 0; /* generous vertical padding */
+  margin-top: -2px; /* slight overlap to prevent gaps on some screens */
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+}
+
+/* When JS adds this class, section slides up into view */
+.stats-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+
+/* Container to center the grid and constrain max width */
+.stats-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem); /* horizontal padding matching hero */
+  display: grid;
+  /* 3 equal columns on desktop */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem; /* Space between columns */
+  align-items: flex-start;
+}
+
+/* Individual Stat Block */
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Wrapper for the big number and suffix to sit side-by-side */
+.stat-block__number-wrap {
+  font-family: 'Anton', sans-serif; /* Matches headline font */
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  color: #fff5dc;
+}
+
+/* The animated number */
+.stat-block__number {
+  font-size: clamp(3.5rem, 5vw, 4.5rem); /* Responsive large font */
+}
+
+/* The suffix (+, M+) */
+.stat-block__suffix {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-left: 0.25rem;
+  color: #ff6105; /* Optional: Use the orange accent color for the suffix */
+}
+
+.stat-block__label {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff5dc;
+}
+
+.stat-block__description {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Slightly transparent beige for description text so it recedes slightly */
+  color: rgba(255, 245, 220, 0.85);
+  margin: 0;
+  max-width: 30ch; /* Limits line length for readability */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   UPDATED RESPONSIVE — Mobile  (≤ 600px)
+   (Replace your existing final media query block with this one)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  /* --- Existing Hero Adjustments --- */
+  .landing {
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding-top: 2rem;
+    gap: 2.5rem;
+  }
+
+  .hero__media  { order: -1; }
+  .hero__content { order:  1; }
+
+  .hero__phone-frame {
+    width: 100vw;
+    height: auto;
+    aspect-ratio: 9/16; /* Enforce portrait ratio on mobile frame */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-top: -2rem;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .hero__video {
+    border-radius: 0;
+  }
+
+  .hero__badge { bottom: 2rem; }
+  .hero__headline { font-size: clamp(2.4rem, 11vw, 3.5rem); }
+
+  /* --- NEW STATS SECTION MOBILE ADJUSTMENTS --- */
+  .stats-section {
+    padding: 3.5rem 0;
+  }
+
+  .stats-container {
+    /* Switch grid to 1 column for stacking */
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    text-align: center; /* Center align text on mobile */
+  }
+
+  /* Center the number wrapper flex container */
+  .stat-block__number-wrap {
+    justify-content: center;
+  }
+
+  /* Remove max-width constraint on description for mobile centering */
+  .stat-block__description {
+    max-width: 100%;
+  }
+}
+
+/* =============================================================
+   SERVICES SECTION
+   GSAP accordion with alternating black / orange cards.
+   Entirely self-contained — no existing styles touched.
+   ============================================================= */
+
+/* ── Section wrapper ─────────────────────────────────────────
+   Warm beige background as requested.
+   Padding top creates space for the sticky heading.
+──────────────────────────────────────────────────────────── */
+.services-section {
+  background-color: #fff5dc;
+  width: 100%;
+  padding-top: 3rem;
+  /* overflow hidden prevents pinned cards from bleeding */
+  overflow: hidden;
+}
+
+/* ── Sticky heading wrapper ──────────────────────────────────
+   Stays at the top of the section while cards are pinned.
+   z-index keeps it above the card stack.
+──────────────────────────────────────────────────────────── */
+.services__heading-wrap {
+  position: relative;
+  text-align: center;
+  padding-bottom: 1rem;
+  /* Beige bg so heading doesn't ghost over cards */
+  background-color: #fff5dc;
+}
+
+/* ── Main heading ────────────────────────────────────────────*/
+.services__heading {
+  font-family: 'Anton', Arial, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Italic "Services" — matches hero em style */
+.services__heading em {
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #ff6105;
+  text-transform: none;
+}
+
+/* ── Cards container ─────────────────────────────────────────
+   GSAP pins this element. Width constrained and centred.
+──────────────────────────────────────────────────────────── */
+.services__accordions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ── Individual card (base) ──────────────────────────────────
+   GSAP collapses .service-card__text inside each card.
+   margin-bottom is also animated by GSAP.
+──────────────────────────────────────────────────────────── */
+.service-card {
+  width: 100%;
+  padding: 2rem 2.5rem 1.5rem;
+  border-radius: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+
+
+}
+
+/* Update your existing .service-card__text class */
+.service-card__text {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  line-height: 1.6;
+  overflow: hidden;         
+  padding-bottom: 1.25rem;
+
+}
+
+/* ── Card variant: dark (black bg, orange text) ───────────── */
+.service-card--dark {
+  background-color: #000000;
+}
+
+.service-card--dark .service-card__title {
+  color: #fff5dc;
+}
+
+.service-card--dark .service-card__text {
+  color: #fff5dc; 
+}
+
+/* ── Card variant: orange (orange bg, black text) ─────────── */
+.service-card--orange {
+  background-color: #ff6105;
+}
+
+.service-card--orange .service-card__title {
+  color: #fff5dc;
+}
+
+.service-card--orange .service-card__text {
+  color: #fff5dc; 
+}
+/* ── Card title ──────────────────────────────────────────────*/
+.service-card__title {
+  font-family: 'Anton', Arial, sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  padding-bottom: 0.5rem;
+}
+
+/* ── Card description — GSAP collapses this ─────────────────
+   overflow: hidden is REQUIRED for height: 0 to work.
+──────────────────────────────────────────────────────────── */
+.service-card__text {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  line-height: 1.6;
+  overflow: hidden;         /* required for GSAP height collapse */
+  padding-bottom: 1.25rem;
+}
+
+/* ── Responsive — Tablet (≤ 768px) ──────────────────────────*/
+@media (max-width: 768px) {
+  .services__accordions {
+    padding-bottom: 0d;
+  }
+
+  .service-card {
+    padding: 1.5rem 1.75rem 1rem;
+  }
+}
+
+/* ── Responsive — Mobile (≤ 480px) ──────────────────────────*/
+@media (max-width: 480px) {
+  .services-section {
+    padding-top: 3rem;
+  }
+
+  .service-card {
+    border-radius: 1rem;
+    margin-bottom: 0rem;
+  }
+}

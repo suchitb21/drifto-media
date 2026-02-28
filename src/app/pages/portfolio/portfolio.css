@@ -1,0 +1,432 @@
+/* =============================================================
+   PORTFOLIO COMPONENT — CSS Infinite Marquee
+   No JavaScript during scroll — pure GPU transform animation.
+   All design tokens in :host for easy theming.
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS  ← modify here to retheme
+   ───────────────────────────────────────────────────────────── */
+:host {
+  /* Colours */
+  --pf-bg:              #fff5dc;
+  --pf-accent:          #ff6105;
+  --pf-black:           #000000;
+  --pf-text-primary:    #000000;
+  --pf-text-muted:      rgba(0, 0, 0, 0.5);
+  --pf-tab-inactive-bg: #000000;
+  --pf-tab-inactive-txt:#fff5dc;
+  --pf-tab-active-bg:   #ff6105;
+  --pf-tab-active-txt:  #000000;
+  --pf-caption-bg:      rgba(0, 0, 0, 0.78);
+  --pf-caption-txt:     #fff5dc;
+  --pf-play-color:      #ff6105;
+
+  /* Slide dimensions — change here to resize all slides */
+  --pf-slide-gap:       1rem;       /* gap between slides           */
+  --pf-portrait-w:      280px;      /* Reels slide width            */
+  --pf-square-w:        280px;      /* Social slide width           */
+  --pf-landscape-w:     420px;      /* Long Form slide width        */
+
+  /* Scroll speeds — lower = faster */
+  --pf-speed-reels:     15s;        /* portrait strip speed         */
+  --pf-speed-social:    16s;        /* square strip speed           */
+  --pf-speed-longform:  17s;        /* landscape strip speed        */
+
+  /* Typography */
+  --pf-font-head: 'Anton', Arial, sans-serif;
+  --pf-font-body: 'Outfit', Arial, sans-serif;
+
+  display: block;
+}
+
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. SECTION WRAPPER
+   ───────────────────────────────────────────────────────────── */
+.portfolio {
+  background-color: var(--pf-bg);
+  width: 100%;
+  padding: clamp(7rem, 10vw, 10rem) 0;
+  /* No overflow:hidden here — the viewport handles clipping */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. SECTION HEADER
+   ───────────────────────────────────────────────────────────── */
+.portfolio__header {
+  text-align: center;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.portfolio__title {
+  font-family: var(--pf-font-head);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--pf-text-primary);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* Italic "Portfolio" — consistent with site-wide em style */
+.portfolio__title em {
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--pf-accent);
+  text-transform: none;
+}
+
+.portfolio__subtitle {
+  font-family: var(--pf-font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--pf-text-muted);
+  margin: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. TAB SWITCHER
+   ───────────────────────────────────────────────────────────── */
+.portfolio__tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+.portfolio__tab {
+  font-family: var(--pf-font-head);
+  font-size: clamp(0.7rem, 1.2vw, 0.88rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--pf-tab-inactive-bg);
+  color: var(--pf-tab-inactive-txt);
+  transition: background-color 0.25s ease, color 0.25s ease,
+              transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.portfolio__tab--active {
+  background-color: var(--pf-tab-active-bg);
+  color: var(--pf-tab-active-txt);
+  box-shadow: 0 4px 16px rgba(255, 97, 5, 0.4);
+  transform: translateY(-2px);
+}
+
+.portfolio__tab:hover:not(.portfolio__tab--active) {
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. PANEL WRAPPER
+   [hidden] keeps all panels in DOM — no reflow on tab switch.
+   ───────────────────────────────────────────────────────────── */
+.portfolio__panel {
+  width: 100%;
+}
+
+.portfolio__panel[hidden] {
+  display: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. VIEWPORT
+   Clips the overflowing track so only visible slides show.
+   Edge fade masks give the strip a soft horizon effect.
+   ───────────────────────────────────────────────────────────── */
+.portfolio__viewport {
+  width: 100%;
+  overflow: hidden;                /* clips the sliding track        */
+  position: relative;
+
+  /* Soft fade at left and right edges — like the reference image */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* Pause on hover — gives user time to read/click */
+.portfolio__viewport:hover .portfolio__track {
+  animation-play-state: paused;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. TRACK — the scrolling flex row
+   Contains slides rendered TWICE (Set A + Set B).
+   The animation moves it left by 50% then snaps back to 0.
+   Because Set A === Set B visually, the snap is invisible.
+   ───────────────────────────────────────────────────────────── */
+.portfolio__track {
+  display: flex;
+  flex-direction: row;
+  gap: var(--pf-slide-gap);
+
+  /* Prevent wrapping — all slides must stay in one line */
+  flex-wrap: nowrap;
+  width: max-content;             /* expands to fit all slides      */
+  padding-top: clamp(1rem , 3vw , 3rem);
+
+  /* GPU layer — keeps compositing off the main thread */
+  will-change: transform;
+}
+
+/* ── Per-track animation speeds ─────────────────────────────── */
+.portfolio__track--reels    { animation: marquee var(--pf-speed-reels)    linear infinite; }
+.portfolio__track--social   { animation: marquee var(--pf-speed-social)   linear infinite; }
+.portfolio__track--longform { animation: marquee var(--pf-speed-longform) linear infinite; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. MARQUEE KEYFRAME
+   Moves the track left by exactly half its total width.
+   Since the track = Set A + Set B (identical), the reset
+   at 0% is visually identical to the end of Set A at 50%.
+   Result: a perfectly seamless infinite loop.
+   ───────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. SLIDE BASE STYLES
+   ───────────────────────────────────────────────────────────── */
+.portfolio__slide {
+  position: relative;
+  flex-shrink: 0;                 /* must not shrink in the flex row */
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--pf-black);
+
+  /* Promote to own GPU compositing layer */
+  transform: translateZ(0);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio__slide:hover {
+  box-shadow: 0 16px 48px rgba(255, 97, 5, 0.3);
+  transform: translateZ(0) scale(1.03);  /* subtle lift on hover   */
+}
+
+/* ── Portrait — Reels 9:16 ────────────────────────────────── */
+.portfolio__slide--portrait {
+  width: var(--pf-portrait-w);
+  aspect-ratio: 9 / 16;
+}
+
+/* ── Square — Social 1:1 ──────────────────────────────────── */
+.portfolio__slide--square {
+  width: var(--pf-square-w);
+  aspect-ratio: 1 / 1;
+}
+
+/* ── Landscape — Long Form 16:9 ───────────────────────────── */
+.portfolio__slide--landscape {
+  width: var(--pf-landscape-w);
+  aspect-ratio: 16 / 9;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. THUMBNAIL IMAGE
+   Fills slide. <img> facade — no iframes. Performance critical.
+   ───────────────────────────────────────────────────────────── */
+.portfolio__thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-color: #1a1a1a;     /* placeholder while loading      */
+  transition: transform 0.4s ease;
+}
+
+.portfolio__slide:hover .portfolio__thumb {
+  transform: scale(1.06);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. PLAY / LINK ICON OVERLAY
+   Fades in on hover. pointer-events:none so click hits slide.
+   ───────────────────────────────────────────────────────────── */
+.portfolio__play-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pf-play-color);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.5) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.portfolio__slide:hover .portfolio__play-icon {
+  opacity: 1;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. CAPTION BAR — bottom-right, slides up on hover
+   ───────────────────────────────────────────────────────────── */
+.portfolio__caption {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.6rem;
+  left: 0.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+
+  background: var(--pf-caption-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.6rem;
+
+  /* Starts hidden below — rises on hover */
+  transform: translateY(0.6rem);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.portfolio__slide:hover .portfolio__caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.portfolio__caption-text {
+  font-family: var(--pf-font-body);
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  font-weight: 600;
+  color: var(--pf-caption-txt);
+  text-align: right;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.portfolio__caption-arrow {
+  font-size: 0.95rem;
+  color: var(--pf-accent);
+  flex-shrink: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   14. RESPONSIVE — Tablet (≤ 768px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :host {
+    --pf-portrait-w:  160px;
+    --pf-square-w:    200px;
+    --pf-landscape-w: 300px;
+    --pf-speed-reels:    22s;
+    --pf-speed-social:   25s;
+    --pf-speed-longform: 28s;
+  }
+
+  .portfolio__tab {
+    font-size: 0.68rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Edge fade narrower on tablet */
+  .portfolio__viewport {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   15. RESPONSIVE — Mobile (≤ 480px)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  :host {
+    --pf-portrait-w:  130px;
+    --pf-square-w:    160px;
+    --pf-landscape-w: 240px;
+    --pf-slide-gap:   0.65rem;
+    --pf-speed-reels:    14s;
+    --pf-speed-social:   15s;
+    --pf-speed-longform: 16s;
+  }
+
+  .portfolio__tab {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 0.62rem;
+    padding: 0.45rem 0.5rem;
+  }
+
+  /* Caption always visible on touch devices */
+  .portfolio__caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .portfolio__play-icon {
+    opacity: 1;
+  }
+
+  /* No edge fade on very small screens */
+  .portfolio__viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   16. ACCESSIBILITY — reduce motion
+   Stops the marquee for users who prefer no animation.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio__track {
+    animation: none !important;
+  }
+
+  .portfolio__thumb,
+  .portfolio__caption,
+  .portfolio__play-icon,
+  .portfolio__slide {
+    transition: none !important;
+  }
+}
