@@ -140,6 +140,11 @@
       [class.service-card--orange]="i % 2 !== 0"
       *ngFor="let service of servicesData; let i = index">
 
+      <!-- Image -->
+      <div class="service-card__image-wrap">
+        <img [src]="service.image" [alt]="service.title" class="service-card__image" loading="lazy" decoding="async" />
+      </div>
+
       <!-- Card title -->
       <div class="service-card__title">{{ service.title }}</div>
 
