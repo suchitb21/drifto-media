@@ -4,7 +4,7 @@
      Background: #000000
      Accent: #ff6105 (orange) | Text: #fff5dc (beige)
      ============================================================= -->
-<footer class="footer" role="contentinfo">
+<footer class="footer" role="contentinfo" id="contact">
 
   <!-- ── TOP BORDER ACCENT LINE ──────────────────────────────── -->
   <div class="footer__top-border" aria-hidden="true"></div>
@@ -77,7 +77,7 @@
       <!-- Rendered from quickLinks[] in footer.ts -->
       <ul class="footer__link-list" role="list">
         <li *ngFor="let link of quickLinks">
-          <a [href]="link.href" class="footer__link">{{ link.label }}</a>
+          <a [routerLink]="link.href" class="footer__link">{{ link.label }}</a>
         </li>
       </ul>
 

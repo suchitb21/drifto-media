@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
+
 
 // ─────────────────────────────────────────────────────────────
 // QUICK LINK INTERFACE
@@ -24,7 +26,7 @@ interface ContactItem {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './footer.html',
   styleUrl: './footer.css'
 })
@@ -34,12 +36,12 @@ export class Footer {
   // QUICK LINKS  ← edit here to update footer nav
   // ─────────────────────────────────────────────────────────────
   quickLinks: QuickLink[] = [
-    { label: 'Home',                  href: '#'              },
-    { label: 'About Us',              href: '#about'         },
-    { label: 'Services',              href: '#services'      },
-    { label: 'Portfolio',             href: '#portfolio'     },
-    { label: 'Wedding Gallery',       href: '#wedding-gallery'},
-    { label: 'Contact',               href: '#contact'       },
+    { label: 'Home',                  href: '/'              },
+    { label: 'About Us',              href: '/about-us'         },
+    { label: 'Services',              href: '/'      },
+    { label: 'Portfolio',             href: '/portfolio'     },
+    { label: 'Wedding Gallery',       href: '/wedding-gallery'},
+    { label: 'Contact',               href: '/'       },
   ];
 
   // ─────────────────────────────────────────────────────────────
