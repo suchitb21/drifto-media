@@ -373,12 +373,6 @@
   }
 }
 
-/* Badge idle float */
-@keyframes badgeFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0);    }
-  50%       { transform: translateX(-50%) translateY(-8px); }
-}
-
 
 /* ─────────────────────────────────────────────────────────────
    8. RESPONSIVE — Tablet  (≤ 900px)
@@ -560,19 +554,32 @@
 
   .hero {
     padding-top: 2rem;
+    padding-left: 0;
+    padding-right: 0;
     gap: 2.5rem;
   }
 
-  .hero__media  { order: -1; }
+  /* --- Replace your existing media and phone-frame classes with this --- */
+
+  .hero__media  { 
+    order: -1; 
+    width: 100%; /* NEW: Forces Safari to give the container full width */
+  }
   .hero__content { order:  1; }
 
   .hero__phone-frame {
     width: 100vw;
     height: auto;
-    aspect-ratio: 9/16; /* Enforce portrait ratio on mobile frame */
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    aspect-ratio: 9/16; 
     margin-top: -2rem;
+    
+    /* THE iOS SAFARI FIX: Bulletproof full-bleed centering */
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -582,7 +589,6 @@
     border-radius: 0;
   }
 
-  .hero__badge { bottom: 2rem; }
   .hero__headline { font-size: clamp(2.4rem, 11vw, 3.5rem); }
 
   /* --- NEW STATS SECTION MOBILE ADJUSTMENTS --- */
@@ -708,8 +714,7 @@
   margin-bottom: 1.5rem;
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
-
-
+  color: #fff5dc;
 }
 
 /* Update your existing .service-card__text class */
@@ -727,26 +732,11 @@
   background-color: #000000;
 }
 
-.service-card--dark .service-card__title {
-  color: #fff5dc;
-}
-
-.service-card--dark .service-card__text {
-  color: #fff5dc; 
-}
-
 /* ── Card variant: orange (orange bg, black text) ─────────── */
 .service-card--orange {
   background-color: #ff6105;
 }
 
-.service-card--orange .service-card__title {
-  color: #fff5dc;
-}
-
-.service-card--orange .service-card__text {
-  color: #fff5dc; 
-}
 /* ── Card title ──────────────────────────────────────────────*/
 .service-card__title {
   font-family: 'Anton', Arial, sans-serif;
@@ -758,21 +748,10 @@
   padding-bottom: 0.5rem;
 }
 
-/* ── Card description — GSAP collapses this ─────────────────
-   overflow: hidden is REQUIRED for height: 0 to work.
-──────────────────────────────────────────────────────────── */
-.service-card__text {
-  font-family: 'Outfit', Arial, sans-serif;
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-  line-height: 1.6;
-  overflow: hidden;         /* required for GSAP height collapse */
-  padding-bottom: 1.25rem;
-}
-
 /* ── Responsive — Tablet (≤ 768px) ──────────────────────────*/
 @media (max-width: 768px) {
   .services__accordions {
-    padding-bottom: 0d;
+    padding-bottom: 1dvh;
   }
 
   .service-card {
@@ -784,10 +763,16 @@
 @media (max-width: 480px) {
   .services-section {
     padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .services__accordions{
+    padding: 1.5rem 2.5rem;
   }
 
   .service-card {
     border-radius: 1rem;
-    margin-bottom: 0rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
   }
 }

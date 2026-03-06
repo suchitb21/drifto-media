@@ -65,11 +65,11 @@ export class Portfolio {
   reels: Slide[] = [
     { thumb: '/tn/drifto.png', heading: 'Drifto Media',       link: 'https://www.instagram.com/reel/DVBnZAcjMoD/?igsh=MWh3cjJ3dGxvbnpnZg==', alt: 'Drifto Signature' },
     { thumb: '/tn/tfl.png', heading: 'Real Estate',    link: 'https://www.instagram.com/reel/DKH4Gx1tQGC/?igsh=YnBuYXd3a3U0OXUz', alt: 'Real Estate' },
-    { thumb: '/tn/tts.png', heading: 'Ambience Stories',           link: 'https://www.instagram.com/reel/DRXcA3tiDLp/?igsh=bXpoMTk1MHZod3Vp', alt: 'H&M reel' },
-    { thumb: '/tn/do.png', heading: 'FNB',    link: 'https://www.instagram.com/reel/DUyI5VtiB4O/?igsh=MXI3bWk0eHI3azZrYg==', alt: 'Puma reel' },
-    { thumb: '/tn/sushima.png', heading: 'BRAND STORY',       link: 'https://www.instagram.com/reel/DSXhv_8jH9Z/?igsh=MWVrcTR4dzNoZHdsaA==', alt: 'Zara reel' },
-    { thumb: '/tn/osd.png', heading: 'FNB',    link: 'https://www.instagram.com/reel/DUtERPADf1N/?igsh=cWE3aGgzZG9zcGhi', alt: 'Adidas reel' },
-    { thumb: '/tn/tbk.png', heading: 'INTERVIEW SERIES',    link: 'https://www.instagram.com/reel/DQrh3etjBVP/?igsh=Ym5pd3JoN2czeXhu', alt: 'Adidas reel' },
+    { thumb: '/tn/tts.png', heading: 'Ambience Stories',           link: 'https://www.instagram.com/reel/DRXcA3tiDLp/?igsh=bXpoMTk1MHZod3Vp', alt: 'Ambience Stories' },
+    { thumb: '/tn/do.png', heading: 'FNB',    link: 'https://www.instagram.com/reel/DUyI5VtiB4O/?igsh=MXI3bWk0eHI3azZrYg==', alt: 'FNB' },
+    { thumb: '/tn/sushima.png', heading: 'BRAND STORY',       link: 'https://www.instagram.com/reel/DSXhv_8jH9Z/?igsh=MWVrcTR4dzNoZHdsaA==', alt: 'BRAND STORY' },
+    { thumb: '/tn/osd.png', heading: 'FNB',    link: 'https://www.instagram.com/reel/DUtERPADf1N/?igsh=cWE3aGgzZG9zcGhi', alt: 'FNB' },
+    { thumb: '/tn/tbk.png', heading: 'INTERVIEW SERIES',    link: 'https://www.instagram.com/reel/DQrh3etjBVP/?igsh=Ym5pd3JoN2czeXhu', alt: 'INTERVIEW SERIES' },
 
   ];
 
