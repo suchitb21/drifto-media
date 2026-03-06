@@ -144,6 +144,122 @@
 }
 
 
+/* =============================================================
+   DISPLAY SECTION — Client Reels
+   Horizontal scroll track with lazy-loaded portrait videos.
+   ============================================================= */
+
+/* ── Section Wrapper ─────────────────────────────────────────── */
+.display {
+  background-color: var(--wg-color-bg);
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  width: 100%;
+}
+
+.display__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── Heading ─────────────────────────────────────────────────── */
+.display__heading {
+  font-family: var(--wg-font-head);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--wg-color-text);
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  padding: 0 var(--wg-padding-x);
+  letter-spacing: -0.01em;
+}
+
+.display__heading em {
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--wg-color-accent);
+  text-transform: none;
+}
+
+/* ── Scroll Track ────────────────────────────────────────────── */
+.display__track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns max */
+  gap: 2rem;
+  padding: 0 var(--wg-padding-x);
+  padding-bottom: 1rem;
+
+}
+
+.display__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Individual Reel Card ────────────────────────────────────── */
+.display__reel {
+  width: 100%;
+}
+
+/* ── Video Frame ─────────────────────────────────────────────── */
+.display__reel-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  cursor: pointer;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.10);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.display__reel-frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Video ────────────────────────────────────────────────────── */
+.display__reel-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Play / Pause Overlay ────────────────────────────────────── */
+.display__reel-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+/* When playing: overlay hides, re-appears on hover */
+.display__reel-overlay--playing {
+  opacity: 0;
+}
+
+.display__reel-frame:hover .display__reel-overlay--playing {
+  opacity: 1;
+}
+
+/* ── Play / Pause Icon ───────────────────────────────────────── */
+.display__reel-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #fff5dc;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+
 /* ─────────────────────────────────────────────────────────────
    6. ANIMATIONS
    ───────────────────────────────────────────────────────────── */
@@ -167,16 +283,17 @@
     grid-template-columns: 1fr;
     text-align: center;
   }
-
   .wg__label {
     justify-content: center;
   }
-
   .wg__subtext {
     max-width: 100%;
   }
+  /* ADD THIS: 2 columns on tablet */
+  .display__track {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-
 
 /* ─────────────────────────────────────────────────────────────
    8. RESPONSIVE — Mobile (≤ 600px)
@@ -219,6 +336,20 @@
 
   .wg__headline {
     font-size: clamp(2.4rem, 11vw, 3.5rem);
+  }
+
+  /* ── Display section mobile ───────────────────────────── */
+/* ── Display section mobile ───────────────────────────── */
+  .display__track {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns side-by-side on mobile */
+    gap: 1rem; /* Tighter gap for small screens */
+  }
+
+  /* (Delete the old .display__reel { flex: 0 0 180px; } rule!) */
+
+  .display__reel-icon {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 

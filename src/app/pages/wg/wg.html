@@ -31,3 +31,60 @@
 
   </div>
 </section>
+
+
+<!-- =============================================================
+     DISPLAY SECTION — Client Reels
+     Horizontal scroll track. Videos are lazy-loaded on first play.
+     Reel data driven from reels[] in wg.ts
+     ============================================================= -->
+<section class="display">
+  <div class="display__inner">
+
+    <h2 class="display__heading">
+      Client <em>Reels</em>
+    </h2>
+
+    <div class="display__track">
+      <div class="display__reel" *ngFor="let reel of reels; let i = index">
+        <div class="display__reel-frame" (click)="toggleReel(i)">
+
+          <video
+            class="display__reel-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            [poster]="reel.thumbnail">
+          </video>
+
+          <!-- Play / Pause overlay -->
+          <div
+            class="display__reel-overlay"
+            [class.display__reel-overlay--playing]="activeReelIndex === i">
+
+            <!-- Play icon -->
+            <svg
+              *ngIf="activeReelIndex !== i"
+              class="display__reel-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+
+            <!-- Pause icon -->
+            <svg
+              *ngIf="activeReelIndex === i"
+              class="display__reel-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
