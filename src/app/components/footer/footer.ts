@@ -38,10 +38,8 @@ export class Footer {
   quickLinks: QuickLink[] = [
     { label: 'Home',                  href: '/'              },
     { label: 'About Us',              href: '/about-us'         },
-    { label: 'Services',              href: '/'      },
     { label: 'Portfolio',             href: '/portfolio'     },
     { label: 'Wedding Gallery',       href: '/wedding-gallery'},
-    { label: 'Contact',               href: '/'       },
   ];
 
   // ─────────────────────────────────────────────────────────────
