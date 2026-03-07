@@ -776,3 +776,91 @@
     padding: 1.5rem;
   }
 }
+
+/* =============================================================
+   LOGO CAROUSEL (Marquee)
+   Black background, seamless infinite left-to-right scroll.
+   ============================================================= */
+
+.logo-carousel {
+  width: 100%;
+  background-color: #000000;
+  /* No top padding to keep it flush with stats section */
+  padding: 0 0 4rem 0; 
+  /* Pull up slightly to prevent 1px sub-pixel rendering gaps */
+  margin-top: -1px; 
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* The moving track — 4 identical copies for seamless fill */
+.logo-carousel__track {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  width: max-content;
+
+  /* Slides left by exactly one set (25% of 4 copies) then resets */
+  animation: logoMarquee 18s linear infinite;
+}
+
+.logo-carousel:hover .logo-carousel__track {
+  animation-play-state: paused;
+}
+
+.logo-carousel__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-carousel__item img {
+  height: 70px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.logo-carousel__item img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes logoMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+/* Responsive — Tablet */
+@media (max-width: 768px) {
+  .logo-carousel__track {
+    gap: 4rem;
+  }
+  .logo-carousel__item img {
+    height: 55px;
+    max-width: 180px;
+  }
+}
+
+/* Responsive — Mobile */
+@media (max-width: 600px) {
+  .logo-carousel {
+    padding: 0 0 3rem 0;
+  }
+  .logo-carousel__track {
+    gap: 3rem;
+    animation-duration: 14s;
+  }
+  .logo-carousel__item img {
+    height: 40px;
+    max-width: 150px;
+  }
+}

@@ -108,6 +108,36 @@
   </section>
 </section>
 
+<section class="logo-carousel">
+  <div class="logo-carousel__track">
+
+    @for (logo of clientLogos; track $index) {
+      <div class="logo-carousel__item">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+    @for (logo of clientLogos; track $index + '-d1') {
+      <div class="logo-carousel__item" aria-hidden="true">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+    @for (logo of clientLogos; track $index + '-d2') {
+      <div class="logo-carousel__item" aria-hidden="true">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+    @for (logo of clientLogos; track $index + '-d3') {
+      <div class="logo-carousel__item" aria-hidden="true">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+  </div>
+</section>
+
 <!-- =============================================================
      SERVICES SECTION
      GSAP ScrollTrigger accordion — cards collapse as you scroll.
