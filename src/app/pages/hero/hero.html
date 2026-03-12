@@ -56,13 +56,13 @@
     <div class="hero__content">
 
       <h1 class="hero__headline">
-        Your Brand Is Not Boring
-        <span class="hero__headline-accent">Let's Prove It.</span>
+        BUILD YOUR
+        <span class="hero__headline-accent"><em>brand</em><br> WITH US.</span>
       </h1>
 
       <p class="hero__subtext">
-        I craft engaging, high-quality videos that capture attention and tell your story.
-        Let’s turn your raw footage into a masterpiece.
+        Social media, done with intent.
+        Strategy, content, and execution that actually move the needle , built for real impact.
       </p>
 
       <a href="#contact" class="hero__cta" (click)="scrollToContact($event)">
@@ -108,13 +108,43 @@
   </section>
 </section>
 
+<section class="logo-carousel">
+  <div class="logo-carousel__track">
+
+    @for (logo of clientLogos; track $index) {
+      <div class="logo-carousel__item">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+    @for (logo of clientLogos; track $index + '-d1') {
+      <div class="logo-carousel__item" aria-hidden="true">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+    @for (logo of clientLogos; track $index + '-d2') {
+      <div class="logo-carousel__item" aria-hidden="true">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+    @for (logo of clientLogos; track $index + '-d3') {
+      <div class="logo-carousel__item" aria-hidden="true">
+        <img [src]="logo" alt="Client Logo" loading="lazy" decoding="async" />
+      </div>
+    }
+
+  </div>
+</section>
+
 <!-- =============================================================
      SERVICES SECTION
      GSAP ScrollTrigger accordion — cards collapse as you scroll.
      "OUR SERVICES" heading stays sticky above the pinned cards.
      Data driven from servicesData[] in hero.ts
      ============================================================= -->
-<section class="services-section">
+<section class="services-section" id="service">
 
   <!-- ── STICKY HEADING ───────────────────────────────────────
        Stays visible at the top of the section at all times.
@@ -139,6 +169,11 @@
       [class.service-card--dark]="i % 2 === 0"
       [class.service-card--orange]="i % 2 !== 0"
       *ngFor="let service of servicesData; let i = index">
+
+      <!-- Image -->
+      <div class="service-card__image-wrap">
+        <img [src]="service.image" [alt]="service.title" class="service-card__image" loading="lazy" decoding="async" />
+      </div>
 
       <!-- Card title -->
       <div class="service-card__title">{{ service.title }}</div>

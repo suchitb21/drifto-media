@@ -236,7 +236,8 @@
 
 /* ── 5b. Headline ─────────────────────────────────────────── */
 .hero__headline {
-  font-family: var(--font-hero);
+  font-family: 'Anton', Arial, sans-serif;
+  -webkit-text-stroke: 0.5px #ff6105;
   font-size: clamp(3rem, 6.5vw, 6rem);
   font-weight: 400;           /* Anton is inherently bold-looking */
   line-height: 1.05;
@@ -246,15 +247,29 @@
   text-transform: uppercase;
 }
 
+.hero__headline-accent {
+  font-family: 'Anton', Arial, sans-serif;
+  -webkit-text-stroke: 0.5px #ff6105;
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-weight: 400;           /* Anton is inherently bold-looking */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+
+
 /* Italic "right" — stands out from the block caps */
 .hero__headline em {
-  font-style: italic;
-  font-family: Georgia, 'Times New Roman', serif; /* contrast serif italic */
-  text-transform: none;
-  font-weight: 700;
-  /* Accent underline */
   position: relative;
-  color: var(--color-text-secondary);
+  font-style: italic;
+  font-family: "Eb garamond", serif;
+  text-transform: none;
+  font-weight: 300;
+  color: #000000;
+  -webkit-text-stroke: transparent;
 }
 
 .hero__headline em::after {
@@ -271,12 +286,12 @@
 
 /* ── 5c. Subtext / Body Copy ──────────────────────────────── */
 .hero__subtext {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.7;
   color: var(--color-text-secondary);
   max-width: 42ch;
   margin: 0;
-  font-family: var(--font-hero) ;
+  font-family: 'Poppins' , sans-serif ;
 }
 
 
@@ -367,12 +382,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Badge idle float */
-@keyframes badgeFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0);    }
-  50%       { transform: translateX(-50%) translateY(-8px); }
 }
 
 
@@ -556,19 +565,32 @@
 
   .hero {
     padding-top: 2rem;
+    padding-left: 0;
+    padding-right: 0;
     gap: 2.5rem;
   }
 
-  .hero__media  { order: -1; }
+  /* --- Replace your existing media and phone-frame classes with this --- */
+
+  .hero__media  { 
+    order: -1; 
+    width: 100%; /* NEW: Forces Safari to give the container full width */
+  }
   .hero__content { order:  1; }
 
   .hero__phone-frame {
     width: 100vw;
     height: auto;
-    aspect-ratio: 9/16; /* Enforce portrait ratio on mobile frame */
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    aspect-ratio: 9/16; 
     margin-top: -2rem;
+    
+    /* THE iOS SAFARI FIX: Bulletproof full-bleed centering */
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -578,7 +600,6 @@
     border-radius: 0;
   }
 
-  .hero__badge { bottom: 2rem; }
   .hero__headline { font-size: clamp(2.4rem, 11vw, 3.5rem); }
 
   /* --- NEW STATS SECTION MOBILE ADJUSTMENTS --- */
@@ -620,6 +641,35 @@
   padding-top: 3rem;
   /* overflow hidden prevents pinned cards from bleeding */
   overflow: hidden;
+}
+
+/* ── Service Card Image Wrapper ───────────────────────────── */
+.service-card__image-wrap {
+  width: 100%;
+  height: 340px;              /* fixed height — change to taste   */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Service Card Image ───────────────────────────────────── */
+.service-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-card__image {
+  transform: scale(1.05);     /* subtle zoom on hover             */
+}
+
+/* ── Responsive — Mobile (≤ 480px) ───────────────────────── */
+@media (max-width: 480px) {
+  .service-card__image-wrap {
+    height: 160px;
+  }
 }
 
 /* ── Sticky heading wrapper ──────────────────────────────────
@@ -675,8 +725,7 @@
   margin-bottom: 1.5rem;
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
-
-
+  color: #fff5dc;
 }
 
 /* Update your existing .service-card__text class */
@@ -694,26 +743,11 @@
   background-color: #000000;
 }
 
-.service-card--dark .service-card__title {
-  color: #fff5dc;
-}
-
-.service-card--dark .service-card__text {
-  color: #fff5dc; 
-}
-
 /* ── Card variant: orange (orange bg, black text) ─────────── */
 .service-card--orange {
   background-color: #ff6105;
 }
 
-.service-card--orange .service-card__title {
-  color: #fff5dc;
-}
-
-.service-card--orange .service-card__text {
-  color: #fff5dc; 
-}
 /* ── Card title ──────────────────────────────────────────────*/
 .service-card__title {
   font-family: 'Anton', Arial, sans-serif;
@@ -725,21 +759,10 @@
   padding-bottom: 0.5rem;
 }
 
-/* ── Card description — GSAP collapses this ─────────────────
-   overflow: hidden is REQUIRED for height: 0 to work.
-──────────────────────────────────────────────────────────── */
-.service-card__text {
-  font-family: 'Outfit', Arial, sans-serif;
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-  line-height: 1.6;
-  overflow: hidden;         /* required for GSAP height collapse */
-  padding-bottom: 1.25rem;
-}
-
 /* ── Responsive — Tablet (≤ 768px) ──────────────────────────*/
 @media (max-width: 768px) {
   .services__accordions {
-    padding-bottom: 0d;
+    padding-bottom: 1dvh;
   }
 
   .service-card {
@@ -751,10 +774,104 @@
 @media (max-width: 480px) {
   .services-section {
     padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .services__accordions{
+    padding: 1.5rem 2.5rem;
   }
 
   .service-card {
     border-radius: 1rem;
-    margin-bottom: 0rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+/* =============================================================
+   LOGO CAROUSEL (Marquee)
+   Black background, seamless infinite left-to-right scroll.
+   ============================================================= */
+
+.logo-carousel {
+  width: 100%;
+  background-color: #000000;
+  /* No top padding to keep it flush with stats section */
+  padding: 0 0 4rem 0; 
+  /* Pull up slightly to prevent 1px sub-pixel rendering gaps */
+  margin-top: -1px; 
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* The moving track — 4 identical copies for seamless fill */
+.logo-carousel__track {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  width: max-content;
+
+  /* Slides left by exactly one set (25% of 4 copies) then resets */
+  animation: logoMarquee 18s linear infinite;
+}
+
+.logo-carousel:hover .logo-carousel__track {
+  animation-play-state: paused;
+}
+
+.logo-carousel__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-carousel__item img {
+  height: 70px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.logo-carousel__item img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes logoMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+/* Responsive — Tablet */
+@media (max-width: 768px) {
+  .logo-carousel__track {
+    gap: 4rem;
+  }
+  .logo-carousel__item img {
+    height: 55px;
+    max-width: 180px;
+  }
+}
+
+/* Responsive — Mobile */
+@media (max-width: 600px) {
+  .logo-carousel {
+    padding: 0 0 3rem 0;
+  }
+  .logo-carousel__track {
+    gap: 3rem;
+    animation-duration: 14s;
+  }
+  .logo-carousel__item img {
+    height: 40px;
+    max-width: 150px;
   }
 }

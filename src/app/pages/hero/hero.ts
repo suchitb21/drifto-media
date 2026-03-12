@@ -11,6 +11,7 @@ interface StatItem {
 interface ServiceItem {
   title: string;
   description: string;
+  image: string; // ← add this
 }
 
 @Component({
@@ -149,24 +150,44 @@ export class Hero implements AfterViewInit {
   servicesData: ServiceItem[] = [
     {
       title: 'Strategy & Brand Positioning',
-      description: 'We dig deep into your brand DNA to craft a positioning strategy that cuts through the noise. From audience research to competitive analysis, we build the foundation that makes everything else work.'
+      description: 'We dig deep into your brand DNA to craft a positioning strategy that cuts through the noise. From audience research to competitive analysis, we build the foundation that makes everything else work.',
+      image: 'services/sbp.webp'
     },
     {
       title: 'Content Creation',
-      description: 'From scroll-stopping reels to thumb-halting carousels — we create platform-native content that your audience actually wants to watch, share, and save. No stock photos, no lazy captions.'
+      description: 'From scroll-stopping reels to thumb-halting carousels — we create platform-native content that your audience actually wants to watch, share, and save. No stock photos, no lazy captions.',
+      image: 'services/cc.webp'
     },
     {
       title: 'Social Media Management',
-      description: 'We take the wheel on your socials end-to-end. Scheduling, community management, trend-jacking, and reporting — so you can focus on running your business while we grow your audience.'
+      description: 'We take the wheel on your socials end-to-end. Scheduling, community management, trend-jacking, and reporting — so you can focus on running your business while we grow your audience.',
+      image: 'services/smm.webp'
     },
     {
       title: 'Performance Marketing',
-      description: 'Paid ads that don\'t just burn budget. We run data-driven campaigns across Meta, Google, and TikTok built to convert — with constant optimisation to keep your cost-per-result dropping.'
+      description: 'Paid ads that don\'t just burn budget. We run data-driven campaigns across Meta, Google, and TikTok built to convert — with constant optimisation to keep your cost-per-result dropping.',
+      image: 'services/pm.webp'
     },
     {
       title: 'Website Development',
-      description: 'Fast, modern, and built to convert. We design and develop websites that tell your brand story and turn visitors into customers — with clean code and zero bloat.'
+      description: 'Fast, modern, and built to convert. We design and develop websites that tell your brand story and turn visitors into customers — with clean code and zero bloat.',
+      image: 'services/web-dev.webp'
     }
+  ];
+
+  // --- CLIENT LOGOS DATA ---
+  clientLogos: string[] = [
+    'logos/BEAN-KAFFEE.webp',
+    'logos/CAARMAXX.webp',
+    'logos/CRAZY-FOR-CHAI.webp',
+    'logos/DROPOUTZ.webp',
+    'logos/HANUMAN-MANDIR.webp',
+    'logos/HEALTHY-CALORIES.webp',
+    'logos/JINKIES-CAFE.webp',
+    'logos/OH-SO-DILLI.webp',
+    'logos/ROOTS.webp',
+    'logos/SUSHIMA.webp',
+    'logos/THATS-MY-JOB.webp',
   ];
 
   scrollToContact(event: Event) {

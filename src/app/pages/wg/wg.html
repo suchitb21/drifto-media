@@ -1,0 +1,103 @@
+<section class="wg">
+  <div class="wg__hero">
+
+    <!-- Left: Text content -->
+    <div class="wg__text">
+      <span class="wg__label">Wedding Gallery</span>
+
+      <h1 class="wg__headline">
+        EVERY MOMENT,
+        <span class="wg__headline-accent">BEAUTIFULLY TOLD.</span>
+      </h1>
+
+      <p class="wg__subtext">
+        Cinematic wedding films that capture the emotion, energy, and elegance of your most unforgettable day.
+      </p>
+    </div>
+
+    <!-- Right: Video -->
+    <div class="wg__media">
+      <div class="wg__video-frame">
+        <video
+          class="wg__video"
+          muted
+          loop
+          playsinline
+          preload="none">
+          <source src="/wg/long.webm" type="video/webm">
+        </video>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================================
+     DISPLAY SECTION — Client Reels
+     Grid of thumbnails. Clicking opens the reel in a modal.
+     Reel data driven from reels[] in wg.ts
+     ============================================================= -->
+<section class="display">
+  <div class="display__inner">
+
+    <h2 class="display__heading">
+      Client <em>Reels</em>
+    </h2>
+
+    <div class="display__track">
+      <div class="display__reel" *ngFor="let reel of reels; let i = index">
+        <div class="display__reel-frame" (click)="openReel(i)">
+
+          <video
+            class="display__reel-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            [poster]="reel.thumbnail">
+          </video>
+
+          <!-- Play overlay -->
+          <div class="display__reel-overlay">
+            <svg class="display__reel-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================================
+     REEL MODAL — Plays the selected reel large with sound
+     ============================================================= -->
+<div
+  class="reel-modal"
+  [class.reel-modal--open]="activeReelIndex !== null"
+  (click)="closeReel()">
+
+  <div class="reel-modal__inner" (click)="$event.stopPropagation()">
+
+    <!-- Close button -->
+    <button class="reel-modal__close" (click)="closeReel()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+
+    <!-- Single video element — src swapped on open -->
+    <video
+      class="reel-modal__video"
+      #modalVideo
+      loop
+      playsinline
+      preload="none"
+      controls>
+    </video>
+
+  </div>
+</div>

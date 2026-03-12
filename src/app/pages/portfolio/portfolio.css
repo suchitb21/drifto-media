@@ -104,9 +104,10 @@
 }
 
 .portfolio__tab {
-  font-family: var(--pf-font-head);
-  font-size: clamp(0.7rem, 1.2vw, 0.88rem);
-  letter-spacing: 0.08em;
+  font-family: 'Poppins' , sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.6rem, 1.1vw, 0.88rem);
+  /* letter-spacing: 0.08em; */
   text-transform: uppercase;
   padding: 0.6rem 1.5rem;
   border-radius: 999px;
