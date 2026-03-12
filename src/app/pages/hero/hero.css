@@ -236,7 +236,8 @@
 
 /* ── 5b. Headline ─────────────────────────────────────────── */
 .hero__headline {
-  font-family: var(--font-hero);
+  font-family: 'Anton', Arial, sans-serif;
+  -webkit-text-stroke: 0.5px #ff6105;
   font-size: clamp(3rem, 6.5vw, 6rem);
   font-weight: 400;           /* Anton is inherently bold-looking */
   line-height: 1.05;
@@ -247,18 +248,28 @@
 }
 
 .hero__headline-accent {
-  color: #000000;
+  font-family: 'Anton', Arial, sans-serif;
+  -webkit-text-stroke: 0.5px #ff6105;
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-weight: 400;           /* Anton is inherently bold-looking */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-transform: uppercase;
 }
+
+
 
 /* Italic "right" — stands out from the block caps */
 .hero__headline em {
-  font-style: italic;
-  font-family: Georgia, 'Times New Roman', serif; /* contrast serif italic */
-  text-transform: none;
-  font-weight: 700;
-  /* Accent underline */
   position: relative;
-  color: var(--color-text-secondary);
+  font-style: italic;
+  font-family: "Eb garamond", serif;
+  text-transform: none;
+  font-weight: 300;
+  color: #000000;
+  -webkit-text-stroke: transparent;
 }
 
 .hero__headline em::after {

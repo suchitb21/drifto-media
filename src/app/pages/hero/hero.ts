@@ -177,17 +177,17 @@ export class Hero implements AfterViewInit {
 
   // --- CLIENT LOGOS DATA ---
   clientLogos: string[] = [
-    'logos/BEAN KAFFEE.webp',
+    'logos/BEAN-KAFFEE.webp',
     'logos/CAARMAXX.webp',
-    'logos/CRAZY FOR CHAI.webp',
+    'logos/CRAZY-FOR-CHAI.webp',
     'logos/DROPOUTZ.webp',
-    'logos/HANUMAN MANDIR.webp',
-    'logos/HEALTHY CALORIES.webp',
-    'logos/JINKIES CAFE.webp',
-    'logos/OH SO DILLI.webp',
+    'logos/HANUMAN-MANDIR.webp',
+    'logos/HEALTHY-CALORIES.webp',
+    'logos/JINKIES-CAFE.webp',
+    'logos/OH-SO-DILLI.webp',
     'logos/ROOTS.webp',
     'logos/SUSHIMA.webp',
-    'logos/THATS MY JOB.webp',
+    'logos/THATS-MY-JOB.webp',
   ];
 
   scrollToContact(event: Event) {

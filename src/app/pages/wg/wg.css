@@ -231,7 +231,7 @@
   object-fit: cover;
 }
 
-/* ── Play / Pause Overlay ────────────────────────────────────── */
+/* ── Play Overlay ────────────────────────────────────────────── */
 .display__reel-overlay {
   position: absolute;
   inset: 0;
@@ -242,21 +242,112 @@
   transition: opacity 0.3s ease;
 }
 
-/* When playing: overlay hides, re-appears on hover */
-.display__reel-overlay--playing {
-  opacity: 0;
+.display__reel-frame:hover .display__reel-overlay {
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
-.display__reel-frame:hover .display__reel-overlay--playing {
-  opacity: 1;
-}
-
-/* ── Play / Pause Icon ───────────────────────────────────────── */
+/* ── Play Icon ───────────────────────────────────────────────── */
 .display__reel-icon {
   width: 3rem;
   height: 3rem;
   color: #fff5dc;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+
+/* =============================================================
+   REEL MODAL — Full-screen-ish lightbox for playing reels
+   ============================================================= */
+
+.reel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    background-color 0.35s ease,
+    backdrop-filter 0.35s ease,
+    visibility 0s 0.35s;
+}
+
+.reel-modal--open {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  visibility: visible;
+  transition:
+    background-color 0.35s ease,
+    backdrop-filter 0.35s ease,
+    visibility 0s 0s;
+}
+
+/* ── Inner Container ─────────────────────────────────────────── */
+.reel-modal__inner {
+  position: relative;
+  width: auto;
+  height: 85vh;
+  max-height: 85vh;
+  aspect-ratio: 9 / 16;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background-color: #000000;
+
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 32px 80px rgba(0, 0, 0, 0.25);
+}
+
+.reel-modal--open .reel-modal__inner {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ── Modal Video ─────────────────────────────────────────────── */
+.reel-modal__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Close Button ────────────────────────────────────────────── */
+.reel-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff5dc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.reel-modal__close:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.reel-modal__close svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 
@@ -338,8 +429,19 @@
     font-size: clamp(2.4rem, 11vw, 3.5rem);
   }
 
+  /* ── Modal mobile ──────────────────────────────────── */
+  .reel-modal__inner {
+    height: 90vh;
+    max-height: 90vh;
+    border-radius: 0.75rem;
+  }
+
+  .reel-modal__close {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
   /* ── Display section mobile ───────────────────────────── */
-/* ── Display section mobile ───────────────────────────── */
   .display__track {
     grid-template-columns: repeat(2, 1fr); /* 2 columns side-by-side on mobile */
     gap: 1rem; /* Tighter gap for small screens */

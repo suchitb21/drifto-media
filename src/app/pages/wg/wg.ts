@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, NgZone, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, NgZone, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ReelItem {
@@ -16,7 +16,7 @@ interface ReelItem {
 export class Wg implements AfterViewInit {
 
   /* ── Reel data — add / remove entries to update the grid ── */
-reels: ReelItem[] = [
+  reels: ReelItem[] = [
     { src: '/wg/1.webm', thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=400&auto=format&fit=crop' },
     { src: '/wg/2.webm', thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop' },
     { src: '/wg/3.webm', thumbnail: 'https://images.unsplash.com/photo-1532712938736-5e153c00c01d?q=80&w=400&auto=format&fit=crop' },
@@ -27,8 +27,10 @@ reels: ReelItem[] = [
 
   activeReelIndex: number | null = null;
 
-  /** Tracks which reels have had their src set (prevents re-download) */
-  private loadedReels = new Set<number>();
+  /** Tracks which reels have been loaded into the modal (prevents re-download) */
+  private lastLoadedSrc = '';
+
+  @ViewChild('modalVideo') modalVideoRef!: ElementRef<HTMLVideoElement>;
 
   constructor(private ngZone: NgZone, private el: ElementRef) {}
 
@@ -65,56 +67,48 @@ reels: ReelItem[] = [
         }, { threshold: 0.05 });
         observer.observe(heroVideo);
       }
-
-      // --- Pause reel when it scrolls out of view ---
-      const reelVideos = this.el.nativeElement.querySelectorAll('.display__reel-video');
-      const reelObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) {
-            (entry.target as HTMLVideoElement).pause();
-          }
-        });
-      }, { threshold: 0.1 });
-      reelVideos.forEach((v: Element) => reelObserver.observe(v));
     });
   }
 
-  /**
-   * Toggle play / pause for a reel.
-   * On first play the video src is set — no bytes downloaded until then.
-   * Only one reel plays at a time.
-   */
-  toggleReel(index: number): void {
-    const frames = this.el.nativeElement.querySelectorAll('.display__reel-frame');
-    const frame = frames[index];
-    if (!frame) return;
-    const video = frame.querySelector('video') as HTMLVideoElement;
+  /** Open modal, lazy-load src, play with sound */
+  openReel(index: number): void {
+    const video = this.modalVideoRef?.nativeElement;
     if (!video) return;
 
-    // Same reel & currently playing → pause
-    if (this.activeReelIndex === index && !video.paused) {
-      video.pause();
-      this.activeReelIndex = null;
-      return;
-    }
+    this.activeReelIndex = index;
+    const reel = this.reels[index];
 
-    // Pause whatever is currently playing
-    if (this.activeReelIndex !== null && this.activeReelIndex !== index) {
-      const allReelVideos = this.el.nativeElement.querySelectorAll('.display__reel-video');
-      allReelVideos.forEach((v: HTMLVideoElement) => v.pause());
-    }
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
 
-    // Lazy-load src on first play (zero download until user clicks)
-    if (!this.loadedReels.has(index)) {
-      video.src = this.reels[index].src;
+    // Load src only if different from what's already loaded
+    if (this.lastLoadedSrc !== reel.src) {
+      video.src = reel.src;
       video.load();
-      this.loadedReels.add(index);
+      this.lastLoadedSrc = reel.src;
     }
 
-    video.muted = true;
+    video.muted = false;
     video.playsInline = true;
     const p = video.play();
     if (p) p.catch(() => {});
-    this.activeReelIndex = index;
+  }
+
+  /** Close modal, pause video, restore scroll */
+  closeReel(): void {
+    const video = this.modalVideoRef?.nativeElement;
+    if (video) {
+      video.pause();
+    }
+    this.activeReelIndex = null;
+    document.body.style.overflow = '';
+  }
+
+  /** ESC key closes the modal */
+  @HostListener('document:keydown.escape')
+  onEsc(): void {
+    if (this.activeReelIndex !== null) {
+      this.closeReel();
+    }
   }
 }
