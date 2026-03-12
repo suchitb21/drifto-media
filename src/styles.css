@@ -10,27 +10,3 @@
 }
 
 
-
-@font-face {
-  font-family: 'Sonder';
-  src: url('/fonts/SonderRegular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; /* Helps with page load performance */
-}
-
-@font-face {
-  font-family: 'CS';
-  src: url('/fonts/ClarizaSparks.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; /* Helps with page load performance */
-}
-
-@font-face {
-  font-family: 'CS';
-  src: url('/fonts/JuicyMilk.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; /* Helps with page load performance */
-}

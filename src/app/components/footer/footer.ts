@@ -50,12 +50,12 @@ export class Footer {
     {
       icon: 'phone',
       text: '+91 93218 76981',
-      subtext: 'Rakesh Bhatia'
+      subtext: 'Hiten Kundaliya'
     },
     {
       icon: 'phone',
       text: '+91 99678 04231',
-      subtext: 'Hiten Kundaliya'
+      subtext: 'Rakesh Bhatia'
     },
     {
       icon: 'phone',
@@ -64,8 +64,8 @@ export class Footer {
     },
     {
       icon: 'email',
-      text: 'driftomedia@gmail.com',
-      href: 'mailto:driftomedia@gmail.com',
+      text: 'driftomedia1@gmail.com',
+      href: 'mailto:driftomedia1@gmail.com',
       subtext: 'For enquiries: '
     },
   ];
