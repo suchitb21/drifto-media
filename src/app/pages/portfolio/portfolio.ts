@@ -87,7 +87,8 @@ export class Portfolio {
 
   // Landscape 16:9 — Long Form
   longform: Slide[] = [
-    { thumb: 'https://picsum.photos/seed/l1/710/400', heading: 'That\'s My Job',  link: 'https://www.youtube.com/watch?v=0sMOaFIjLq8', alt: 'Tata longform' },
-    { thumb: 'https://picsum.photos/seed/l2/710/400', heading: 'Hanuman Mandir Tilak Nagar',  link: 'https://www.youtube.com/watch?v=NNvsOII05RE&t=154s', alt: 'Sony longform' },
+    { thumb: '/lf1.jpeg', heading: 'That\'s My Job',  link: 'https://www.youtube.com/watch?v=0sMOaFIjLq8', alt: 'TMJ' },
+    { thumb: '/lf2.jpeg', heading: 'Hanuman Mandir Tilak Nagar',  link: 'https://www.youtube.com/watch?v=NNvsOII05RE&t=154s', alt: 'HMTN' },
+    { thumb: '/lf3.jpeg', heading: 'Bean Kaffe',  link: 'https://youtu.be/oME5nPi1jDM?feature=shared', alt: 'BK' },
   ];
 }

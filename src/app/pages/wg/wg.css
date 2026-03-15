@@ -86,13 +86,12 @@
 
 /* ── Headline ───────────────────────────────────────────────── */
 .wg__headline {
-  font-family: var(--wg-font-head);
-  font-size: clamp(3rem, 6.5vw, 6rem);
-  font-weight: 400;
+  font-family: 'Cinzel Decorative' , serif;
+  font-size: clamp(3rem, 6.2vw, 6rem);
+  font-weight: 100;
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  /* letter-spacing: -0.01em; */
   color: var(--wg-color-text);
-  text-transform: uppercase;
   margin: 0;
 }
 
@@ -256,6 +255,26 @@
 
 
 /* =============================================================
+   LANDSCAPE REELS — 2-col on desktop, 1-col on mobile
+   ============================================================= */
+
+.display__track-landscape {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 2rem var(--wg-padding-x) 0;
+}
+
+.display__reel-landscape {
+  width: 100%;
+}
+
+.display__reel-frame--landscape {
+  aspect-ratio: 16 / 9;
+}
+
+
+/* =============================================================
    REEL MODAL — Full-screen-ish lightbox for playing reels
    ============================================================= */
 
@@ -350,6 +369,15 @@
   height: 1.25rem;
 }
 
+/* ── Landscape Modal Variant ─────────────────────────────────── */
+.reel-modal__inner--landscape {
+  height: auto;
+  max-height: none;
+  width: 85vw;
+  max-width: 1100px;
+  aspect-ratio: 16 / 9;
+}
+
 
 /* ─────────────────────────────────────────────────────────────
    6. ANIMATIONS
@@ -441,13 +469,22 @@
     right: 0.75rem;
   }
 
-  /* ── Display section mobile ───────────────────────────── */
-  .display__track {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns side-by-side on mobile */
-    gap: 1rem; /* Tighter gap for small screens */
+  .reel-modal__inner--landscape {
+    width: 95vw;
   }
 
-  /* (Delete the old .display__reel { flex: 0 0 180px; } rule!) */
+  /* ── Display section mobile ───────────────────────────── */
+  .display__track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Landscape reels: 1 per row on mobile */
+  .display__track-landscape {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
 
   .display__reel-icon {
     width: 2.5rem;

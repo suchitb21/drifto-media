@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 interface ReelItem {
   src: string;
   thumbnail: string;
+  landscape?: boolean;
 }
 
 @Component({
@@ -17,15 +18,34 @@ export class Wg implements AfterViewInit {
 
   /* ── Reel data — add / remove entries to update the grid ── */
   reels: ReelItem[] = [
-    { src: '/wg/1.webm', thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=400&auto=format&fit=crop' },
-    { src: '/wg/2.webm', thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop' },
-    { src: '/wg/3.webm', thumbnail: 'https://images.unsplash.com/photo-1532712938736-5e153c00c01d?q=80&w=400&auto=format&fit=crop' },
-    { src: '/wg/4.webm', thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=400&auto=format&fit=crop' },
-    { src: '/wg/5.webm', thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop' },
-    { src: '/wg/6.webm', thumbnail: 'https://images.unsplash.com/photo-1532712938736-5e153c00c01d?q=80&w=400&auto=format&fit=crop' },
+    { src: '/wg/1.webm', thumbnail: '/wg/tn/1.jpeg' },
+    { src: '/wg/2.webm', thumbnail: '/wg/tn/2.jpeg' },
+    { src: '/wg/3.webm', thumbnail: '/wg/tn/3.jpeg' },
+    { src: '/wg/4.webm', thumbnail: '/wg/tn/4.jpeg' },
+    { src: '/wg/5.webm', thumbnail: '/wg/tn/5.jpeg' },
+    { src: '/wg/6.webm', thumbnail: '/wg/tn/6.jpeg' },
+    { src: '/wg/7.webm', thumbnail: '/wg/tn/8.jpeg', landscape: true },
+    { src: '/wg/8.webm', thumbnail: '/wg/tn/7.jpeg', landscape: true },
   ];
 
   activeReelIndex: number | null = null;
+
+  /** Filtered views with original index preserved */
+  get portraitReels() {
+    return this.reels
+      .map((r, i) => ({ ...r, index: i }))
+      .filter(r => !r.landscape);
+  }
+
+  get landscapeReels() {
+    return this.reels
+      .map((r, i) => ({ ...r, index: i }))
+      .filter(r => r.landscape);
+  }
+
+  get isActiveReelLandscape(): boolean {
+    return this.activeReelIndex !== null && !!this.reels[this.activeReelIndex]?.landscape;
+  }
 
   /** Tracks which reels have been loaded into the modal (prevents re-download) */
   private lastLoadedSrc = '';

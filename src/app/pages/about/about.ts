@@ -35,8 +35,8 @@ export class About {
     {
       name:       'Rakesh Bhatia',
       role:       'Co-Founder',
-      department: 'Vision & Strategy',
-      bio:        'The creative force behind it all. Alex turns raw ideas into brand stories that stick, scale, and convert across every platform.',
+      department: 'Business Development',
+      bio:        'Drives the agency’s growth by building strong client relationships, identifying new opportunities, and turning ideas into successful partnerships.',
       image:      '/founders/rakesh.jpeg',
       socials: {
         instagram: 'https://instagram.com',
@@ -46,8 +46,8 @@ export class About {
     {
       name:       'Yuvraj Thadani',
       role:       'Co-Founder',
-      department: 'Content & Production',
-      bio:        'Priya directs every frame with intention — from concept to final cut, nothing leaves without her eye on it.',
+      department: 'Lead Editor',
+      bio:        'The backbone of our production, transforming ideas into visually compelling stories through precision, creativity, and attention to every detail.',
       image:      '/founders/uv.jpeg',   // ← swap to /founder/2.webp
       socials: {
         instagram: 'https://instagram.com',
@@ -57,8 +57,8 @@ export class About {
     {
       name:       'Hiten Kundaliya',
       role:       'Co-Founder',
-      department: 'Growth & Performance',
-      bio:        'Jordan makes sure the work is seen. Paid media, analytics, and platform strategy — the engine behind every campaign.',
+      department: 'Creative Director',
+      bio:        'Leads the creative vision of the agency, shaping ideas, concepts, and campaigns that help brands stand out and create meaningful.',
       image:      '/founders/hiten.jpeg',   // ← swap to /founder/3.webp
       socials: {
         linkedin: 'https://linkedin.com',

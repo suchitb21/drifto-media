@@ -236,51 +236,15 @@
 
 /* ── 5b. Headline ─────────────────────────────────────────── */
 .hero__headline {
-  font-family: 'Anton', Arial, sans-serif;
-  -webkit-text-stroke: 0.5px #ff6105;
-  font-size: clamp(3rem, 6.5vw, 6rem);
-  font-weight: 400;           /* Anton is inherently bold-looking */
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--color-text-primary);
   margin: 0;
-  text-transform: uppercase;
+  line-height: 0;
 }
 
-.hero__headline-accent {
-  font-family: 'Anton', Arial, sans-serif;
-  -webkit-text-stroke: 0.5px #ff6105;
-  font-size: clamp(3rem, 6.5vw, 6rem);
-  font-weight: 400;           /* Anton is inherently bold-looking */
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--color-text-primary);
-  margin: 0;
-  text-transform: uppercase;
-}
-
-
-
-/* Italic "right" — stands out from the block caps */
-.hero__headline em {
-  position: relative;
-  font-style: italic;
-  font-family: "Eb garamond", serif;
-  text-transform: none;
-  font-weight: 300;
-  color: #000000;
-  -webkit-text-stroke: transparent;
-}
-
-.hero__headline em::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
+.hero__headline-img {
   width: 100%;
-  height: 4px;
-  background-color: var(--color-accent);
-  border-radius: 2px;
+  max-width: clamp(280px, 45vw, 550px);
+  height: auto;
+  display: block;
 }
 
 
@@ -406,9 +370,8 @@
     align-self: center;
   }
 
-  .hero__headline em::after {
-    left: 50%;
-    transform: translateX(-50%);
+  .hero__headline-img {
+    margin: 0 auto;
   }
 }
 
@@ -451,9 +414,6 @@
     aspect-ratio: auto; /* Overrides the 9/16 ratio to prevent letterboxing */
   }
 
-  .hero__headline {
-    font-size: clamp(2.4rem, 11vw, 3.5rem);
-  }
 }
 
 /* ... keep all previous CSS above this line ... */
@@ -599,8 +559,6 @@
   .hero__video {
     border-radius: 0;
   }
-
-  .hero__headline { font-size: clamp(2.4rem, 11vw, 3.5rem); }
 
   /* --- NEW STATS SECTION MOBILE ADJUSTMENTS --- */
   .stats-section {
