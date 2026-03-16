@@ -1,59 +1,95 @@
-# DriftoMedia
+# Drifto Media — Agency Website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+A modern, responsive website for **Drifto Media**, a social media agency that helps brands build a strong digital presence through strategy, content creation, and performance marketing.
 
-## Development server
+**Live:** [driftomedia.in](https://driftomedia.in)
 
-To start a local development server, run:
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Angular 21 (Standalone Components) |
+| Styling | Scoped CSS with custom properties (design tokens) |
+| Animations | CSS keyframes, GSAP ScrollTrigger, IntersectionObserver |
+| Fonts | Horizon, Anton, Outfit, Poppins, Cinzel Decorative |
+| Hosting | Netlify |
+| Video | WebM with lazy loading & autoplay observers |
+
+---
+
+## Pages
+
+- **Home** — Full-screen video hero, animated tagline, two-column intro with phone-frame video, stats counter, logo carousel, services accordion
+- **Portfolio** — Tabbed layout with infinite CSS marquee strips for Reels (portrait 9:16), Social Media Creatives (square 1:1), and Long Form Production (landscape 16:9)
+- **Wedding Gallery** — Video hero, portrait & landscape reel grids with modal lightbox playback
+- **About Us** — Company story and team
+
+---
+
+## Features
+
+- Fully responsive across desktop, tablet, and mobile
+- GPU-accelerated infinite scroll carousels (pure CSS, no JS during animation)
+- Lazy video loading — videos only download when played
+- Modal lightbox with portrait/landscape detection, ESC key dismiss, and body scroll lock
+- GSAP-powered services accordion with alternating card themes
+- Animated stats counter with easeOut timing
+- Floating WhatsApp CTA button
+- IntersectionObserver-based video autoplay with iOS Safari fallback
+
+---
+
+## Project Structure
+
+```
+src/
+  app/
+    pages/
+      hero/           # Home page (video hero, stats, logos, services)
+      portfolio/      # Portfolio with tabbed marquee strips
+      wg/             # Wedding Gallery (reel grid + modal)
+      about/          # About Us
+    components/
+      navbar/         # Fixed navbar with mobile drawer
+      footer/         # Footer with social links
+    app.html          # Root layout (navbar + router-outlet + footer + WhatsApp FAB)
+    app.routes.ts     # Route definitions
+  styles.css          # Global styles & font-face declarations
+public/
+  wg/                 # Wedding gallery videos & thumbnails
+  graphics/           # Social media creative images
+  services/           # Service card images
+  logos/              # Client logo images
+  font/               # Custom fonts (Horizon)
+```
+
+---
+
+## Getting Started
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
+# Build for production
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Color Palette
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+| Color | Hex | Usage |
+|-------|-----|-------|
+| Beige | `#fff5dc` | Background, light text |
+| Orange | `#ff6105` | Primary accent, CTAs, highlights |
+| Black | `#000000` | Text, dark sections, card backgrounds |
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Built by [Drifto Media](https://driftomedia.in)
