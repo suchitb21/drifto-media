@@ -63,32 +63,32 @@ export class Portfolio {
 
   // Portrait 9:16 — Reels
   reels: Slide[] = [
-    { thumb: '/tn/drifto.png', heading: 'Drifto Media',       link: 'https://www.instagram.com/reel/DVBnZAcjMoD/?igsh=MWh3cjJ3dGxvbnpnZg==', alt: 'Drifto Signature' },
-    { thumb: '/tn/tfl.png', heading: 'Real Estate',    link: 'https://www.instagram.com/reel/DKH4Gx1tQGC/?igsh=YnBuYXd3a3U0OXUz', alt: 'Real Estate' },
-    { thumb: '/tn/tts.png', heading: 'Ambience Stories',           link: 'https://www.instagram.com/reel/DRXcA3tiDLp/?igsh=bXpoMTk1MHZod3Vp', alt: 'Ambience Stories' },
-    { thumb: '/tn/do.png', heading: 'FNB',    link: 'https://www.instagram.com/reel/DUyI5VtiB4O/?igsh=MXI3bWk0eHI3azZrYg==', alt: 'FNB' },
-    { thumb: '/tn/sushima.png', heading: 'BRAND STORY',       link: 'https://www.instagram.com/reel/DSXhv_8jH9Z/?igsh=MWVrcTR4dzNoZHdsaA==', alt: 'BRAND STORY' },
-    { thumb: '/tn/osd.png', heading: 'FNB',    link: 'https://www.instagram.com/reel/DUtERPADf1N/?igsh=cWE3aGgzZG9zcGhi', alt: 'FNB' },
-    { thumb: '/tn/tbk.png', heading: 'INTERVIEW SERIES',    link: 'https://www.instagram.com/reel/DQrh3etjBVP/?igsh=Ym5pd3JoN2czeXhu', alt: 'INTERVIEW SERIES' },
+    { thumb: '/tn/drifto.webp', heading: 'Drifto Media',       link: 'https://www.instagram.com/reel/DVBnZAcjMoD/?igsh=MWh3cjJ3dGxvbnpnZg==', alt: 'Drifto Signature' },
+    { thumb: '/tn/tfl.webp', heading: 'Real Estate',    link: 'https://www.instagram.com/reel/DKH4Gx1tQGC/?igsh=YnBuYXd3a3U0OXUz', alt: 'Real Estate' },
+    { thumb: '/tn/tts.webp', heading: 'Ambience Stories',           link: 'https://www.instagram.com/reel/DRXcA3tiDLp/?igsh=bXpoMTk1MHZod3Vp', alt: 'Ambience Stories' },
+    { thumb: '/tn/do.webp', heading: 'F&B',    link: 'https://www.instagram.com/reel/DUyI5VtiB4O/?igsh=MXI3bWk0eHI3azZrYg==', alt: 'FNB' },
+    { thumb: '/tn/sushima.webp', heading: 'BRAND STORY',       link: 'https://www.instagram.com/reel/DSXhv_8jH9Z/?igsh=MWVrcTR4dzNoZHdsaA==', alt: 'BRAND STORY' },
+    { thumb: '/tn/osd.webp', heading: 'F&B',    link: 'https://www.instagram.com/reel/DUtERPADf1N/?igsh=cWE3aGgzZG9zcGhi', alt: 'FNB' },
+    { thumb: '/tn/tbk.webp', heading: 'INTERVIEW SERIES',    link: 'https://www.instagram.com/reel/DQrh3etjBVP/?igsh=Ym5pd3JoN2czeXhu', alt: 'INTERVIEW SERIES' },
 
   ];
 
-  // Square 1:1 — Social Media Creatives
-  social: Slide[] = [
-    { thumb: 'graphics/1.webp', heading: 'Campaign Grid — Adidas',    link: 'https://instagram.com', alt: 'Adidas social' },
-    { thumb: 'graphics/2.webp', heading: 'Product Carousel — Zara',   link: 'https://instagram.com', alt: 'Zara social' },
-    { thumb: 'graphics/3.webp', heading: 'Story Series — Swiggy',     link: 'https://instagram.com', alt: 'Swiggy social' },
-    { thumb: 'graphics/4.webp', heading: 'Meme Campaign — Netflix',   link: 'https://instagram.com', alt: 'Netflix social' },
-    { thumb: 'graphics/5.webp', heading: 'UGC Strategy — boAt',       link: 'https://instagram.com', alt: 'boAt social' },
-    { thumb: 'graphics/6.webp', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
-    { thumb: 'graphics/7.webp', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
-    { thumb: 'graphics/8.webp', heading: 'Launch Grid — Nykaa',       link: 'https://instagram.com', alt: 'Nykaa social' },
+  // Square 1:1 — Social Media Creatives (display only, no links)
+  social: string[] = [
+    'graphics/1.webp',
+    'graphics/2.webp',
+    'graphics/3.webp',
+    'graphics/4.webp',
+    'graphics/5.webp',
+    'graphics/6.webp',
+    'graphics/7.webp',
+    'graphics/8.webp',
   ];
 
   // Landscape 16:9 — Long Form
   longform: Slide[] = [
-    { thumb: '/lf1.jpeg', heading: 'That\'s My Job',  link: 'https://www.youtube.com/watch?v=0sMOaFIjLq8', alt: 'TMJ' },
-    { thumb: '/lf2.jpeg', heading: 'Hanuman Mandir Tilak Nagar',  link: 'https://www.youtube.com/watch?v=NNvsOII05RE&t=154s', alt: 'HMTN' },
+    { thumb: '/lf2.jpeg', heading: 'That\'s My Job',  link: 'https://www.youtube.com/watch?v=0sMOaFIjLq8', alt: 'TMJ' },
+    { thumb: '/lf1.jpeg', heading: 'Hanuman Mandir Tilak Nagar',  link: 'https://www.youtube.com/watch?v=NNvsOII05RE&t=154s', alt: 'HMTN' },
     { thumb: '/lf3.jpeg', heading: 'Bean Kaffe',  link: 'https://youtu.be/oME5nPi1jDM?feature=shared', alt: 'BK' },
   ];
 }

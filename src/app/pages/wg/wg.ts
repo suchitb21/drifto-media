@@ -18,14 +18,14 @@ export class Wg implements AfterViewInit {
 
   /* ── Reel data — add / remove entries to update the grid ── */
   reels: ReelItem[] = [
-    { src: '/wg/1.webm', thumbnail: '/wg/tn/1.jpeg' },
-    { src: '/wg/2.webm', thumbnail: '/wg/tn/2.jpeg' },
-    { src: '/wg/3.webm', thumbnail: '/wg/tn/3.jpeg' },
-    { src: '/wg/4.webm', thumbnail: '/wg/tn/4.jpeg' },
-    { src: '/wg/5.webm', thumbnail: '/wg/tn/5.jpeg' },
-    { src: '/wg/6.webm', thumbnail: '/wg/tn/6.jpeg' },
-    { src: '/wg/7.webm', thumbnail: '/wg/tn/8.jpeg', landscape: true },
-    { src: '/wg/8.webm', thumbnail: '/wg/tn/7.jpeg', landscape: true },
+    { src: '/wg/1.webm', thumbnail: '/wg/tn/1.webp' },
+    { src: '/wg/2.webm', thumbnail: '/wg/tn/2.webp' },
+    { src: '/wg/3.webm', thumbnail: '/wg/tn/3.webp' },
+    { src: '/wg/4.webm', thumbnail: '/wg/tn/4.webp' },
+    { src: '/wg/5.webm', thumbnail: '/wg/tn/5.webp' },
+    { src: '/wg/6.webm', thumbnail: '/wg/tn/6.webp' },
+    { src: '/wg/7.webm', thumbnail: '/wg/tn/8.webp', landscape: true },
+    { src: '/wg/8.webm', thumbnail: '/wg/tn/7.webp', landscape: true },
   ];
 
   activeReelIndex: number | null = null;
