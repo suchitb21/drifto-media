@@ -131,46 +131,46 @@ export class Hero implements AfterViewInit {
       value: 3,
       suffix: '+',
       label: 'Years Experience',
-      description: 'Delivering high-quality video solutions consistently over the years with proven expertise.'
+      description: 'Delivering creative social media strategies, content ideas, and brand storytelling that help businesses build a strong digital presence.'
     },
     {
       value: 10,
       suffix: 'M+',
       label: 'Total Views',
-      description: 'Creating engaging content that resonates with massive audiences across platforms worldwide.'
+      description: 'Creating engaging content that has collectively generated over 10 million views across our clients’ social media platforms.'
     },
     {
       value: 20,
       suffix: '+',
       label: 'Clients Served',
-      description: 'Trusted by a diverse range of clients to bring their creative visions to life effectively.'
+      description: 'Partnered with brands across F&B, religious, and service sectors to grow their online presence and drive real engagement.'
     }
   ];
 
   servicesData: ServiceItem[] = [
     {
       title: 'Strategy & Brand Positioning',
-      description: 'We dig deep into your brand DNA to craft a positioning strategy that cuts through the noise. From audience research to competitive analysis, we build the foundation that makes everything else work.',
+      description: 'We help brands find their unique voice and stand out in the digital crowd. With smart strategy, audience insights, and strong positioning, we shape how your brand is seen, remembered, and chosen online.',
       image: 'services/sbp.webp'
     },
     {
       title: 'Content Creation',
-      description: 'From scroll-stopping reels to thumb-halting carousels — we create platform-native content that your audience actually wants to watch, share, and save. No stock photos, no lazy captions.',
+      description: 'We create content that’s made to stop the scroll and spark engagement. From reels and photos to trend-driven ideas, our team crafts visuals and stories that feel authentic, fresh, and perfectly aligned with your brand.',
       image: 'services/cc.webp'
     },
     {
       title: 'Social Media Management',
-      description: 'We take the wheel on your socials end-to-end. Scheduling, community management, trend-jacking, and reporting — so you can focus on running your business while we grow your audience.',
+      description: 'We handle your social media so you can focus on your business. From posting and planning to engagement and growth, we manage your platforms with consistency, creativity, and strategies that keep your brand active, relevant, and growing online.',
       image: 'services/smm.webp'
     },
     {
       title: 'Performance Marketing',
-      description: 'Paid ads that don\'t just burn budget. We run data-driven campaigns across Meta, Google, and TikTok built to convert — with constant optimisation to keep your cost-per-result dropping.',
+      description: 'We run data-driven ad campaigns that focus on real results. From targeted ads to continuous optimization, we help your brand reach the right audience, drive quality leads, and turn clicks into measurable growth.',
       image: 'services/pm.webp'
     },
     {
       title: 'Website Development',
-      description: 'Fast, modern, and built to convert. We design and develop websites that tell your brand story and turn visitors into customers — with clean code and zero bloat.',
+      description: 'We design clean, modern websites that not only look great but also work seamlessly. From user-friendly layouts to mobile-ready designs, we create websites that represent your brand well and turn visitors into customers',
       image: 'services/web-dev.webp'
     }
   ];
@@ -181,13 +181,14 @@ export class Hero implements AfterViewInit {
     'logos/CAARMAXX.webp',
     'logos/CRAZY-FOR-CHAI.webp',
     'logos/DROPOUTZ.webp',
-    'logos/HANUMAN-MANDIR.webp',
     'logos/HEALTHY-CALORIES.webp',
     'logos/JINKIES-CAFE.webp',
     'logos/OH-SO-DILLI.webp',
     'logos/ROOTS.webp',
     'logos/SUSHIMA.webp',
     'logos/THATS-MY-JOB.webp',
+    '/logos/11bg.png',
+    '/logos/12bg.png',
   ];
 
   scrollToContact(event: Event) {

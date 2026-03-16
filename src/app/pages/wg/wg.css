@@ -470,7 +470,10 @@
   }
 
   .reel-modal__inner--landscape {
+    height: auto;
+    max-height: none;
     width: 95vw;
+    aspect-ratio: 16 / 9;
   }
 
   /* ── Display section mobile ───────────────────────────── */

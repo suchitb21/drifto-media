@@ -275,6 +275,11 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .about__subtitle {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
 
 }
 

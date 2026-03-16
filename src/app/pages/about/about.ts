@@ -39,8 +39,8 @@ export class About {
       bio:        'Drives the agency’s growth by building strong client relationships, identifying new opportunities, and turning ideas into successful partnerships.',
       image:      '/founders/rakesh.jpeg',
       socials: {
-        instagram: 'https://instagram.com',
-        linkedin:  'https://linkedin.com',
+        instagram: 'https://www.instagram.com/rakesh_bhatia95?igsh=ejQ5Y215YjVib3Q1',
+        linkedin:  'https://www.linkedin.com/in/rakesh-bhatia-927a1a360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
       },
     },
     {
@@ -50,8 +50,8 @@ export class About {
       bio:        'The backbone of our production, transforming ideas into visually compelling stories through precision, creativity, and attention to every detail.',
       image:      '/founders/uv.jpeg',   // ← swap to /founder/2.webp
       socials: {
-        instagram: 'https://instagram.com',
-        linkedin:  'https://linkedin.com',
+        instagram: 'https://www.instagram.com/yuvraj_thadani?igsh=MWExYWJiMnV5M2JzOQ==',
+        linkedin:  'https://www.linkedin.com/in/yuvraj-thadani-6420603b4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
       },
     },
     {
@@ -61,7 +61,8 @@ export class About {
       bio:        'Leads the creative vision of the agency, shaping ideas, concepts, and campaigns that help brands stand out and create meaningful.',
       image:      '/founders/hiten.jpeg',   // ← swap to /founder/3.webp
       socials: {
-        linkedin: 'https://linkedin.com',
+        instagram: 'https://www.instagram.com/hiten.kundaliya?igsh=YWhoNGl0cWFwdHJz',
+        linkedin: 'https://www.linkedin.com/in/hiten-kundaliya-7a57b23b7?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       },
     },
   ];
