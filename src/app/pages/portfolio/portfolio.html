@@ -103,47 +103,19 @@
 
         <!-- Set A -->
         <div
-          *ngFor="let slide of social"
-          class="portfolio__slide portfolio__slide--square"
-          (click)="openLink(slide.link)"
-          role="button"
-          [attr.aria-label]="slide.heading">
-          <img [src]="slide.thumb" [alt]="slide.alt"
+          *ngFor="let src of social"
+          class="portfolio__slide portfolio__slide--square">
+          <img [src]="src" alt=""
                class="portfolio__thumb" loading="lazy" decoding="async"/>
-          <div class="portfolio__play-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.5" width="30" height="30">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15,3 21,3 21,9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </div>
-          <div class="portfolio__caption">
-            <span class="portfolio__caption-text">{{ slide.heading }}</span>
-            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
-          </div>
         </div>
 
         <!-- Set B — duplicate -->
         <div
-          *ngFor="let slide of social"
+          *ngFor="let src of social"
           class="portfolio__slide portfolio__slide--square"
-          (click)="openLink(slide.link)"
           aria-hidden="true">
-          <img [src]="slide.thumb" [alt]="slide.alt"
+          <img [src]="src" alt=""
                class="portfolio__thumb" loading="lazy" decoding="async"/>
-          <div class="portfolio__play-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.5" width="30" height="30">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15,3 21,3 21,9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </div>
-          <div class="portfolio__caption">
-            <span class="portfolio__caption-text">{{ slide.heading }}</span>
-            <span class="portfolio__caption-arrow" aria-hidden="true">↗</span>
-          </div>
         </div>
 
       </div>
