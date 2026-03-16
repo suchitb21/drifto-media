@@ -1,0 +1,57 @@
+/* =============================================================
+   FLOATING WHATSAPP FAB — Bottom-right, persistent across pages
+   ============================================================= */
+
+.wa-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background-color: #ff6105;
+  color: #fff5dc;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.wa-fab:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.wa-fab:active {
+  transform: scale(0.95);
+}
+
+.wa-fab svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .wa-fab {
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .wa-fab svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}

@@ -25,10 +25,10 @@
     <!-- ── DESKTOP NAV LINKS (centre) ────────────────────── -->
     <ul class="navbar__links" role="list">
 
-      <!-- Wedding Gallery -->
+      <!-- Services -->
       <li>
-        <a routerLink="/wedding-gallery" class="navbar__link" (click)="closeMenu()">
-          Wedding Gallery
+        <a routerLink="/" fragment="service" class="navbar__link" (click)="closeMenu()">
+          Services
         </a>
       </li>
 
@@ -36,6 +36,13 @@
       <li>
         <a routerLink="/portfolio" class="navbar__link" (click)="closeMenu()">
           Portfolio
+        </a>
+      </li>
+    
+      <!-- Wedding Gallery -->
+      <li>
+        <a routerLink="/wedding-gallery" class="navbar__link" (click)="closeMenu()">
+          Wedding Gallery
         </a>
       </li>
 
@@ -46,12 +53,6 @@
         </a>
       </li>
 
-      <!-- Services -->
-      <li>
-        <a routerLink="/" fragment="service" class="navbar__link" (click)="closeMenu()">
-          Services
-        </a>
-      </li>
 
     </ul>
 
@@ -87,10 +88,11 @@
 
     <ul class="navbar__drawer-links" role="list">
 
-      <li><a routerLink="/wedding-gallery" class="navbar__drawer-link" (click)="closeMenu()">Wedding Gallery</a></li>
-      <li><a routerLink="/portfolio"       class="navbar__drawer-link" (click)="closeMenu()">Portfolio</a></li>
-      <li><a routerLink="/about-us"           class="navbar__drawer-link" (click)="closeMenu()">About Us</a></li>
       <li><a routerLink="/"  fragment="service" class="navbar__drawer-link" (click)="closeMenu()">Services</a></li>
+      <li><a routerLink="/portfolio"       class="navbar__drawer-link" (click)="closeMenu()">Portfolio</a></li>
+      <li><a routerLink="/wedding-gallery" class="navbar__drawer-link" (click)="closeMenu()">Wedding Gallery</a></li>
+      <li><a routerLink="/about-us"           class="navbar__drawer-link" (click)="closeMenu()">About Us</a></li>
+
 
       <!-- Contact repeated in drawer for mobile convenience -->
       <li>

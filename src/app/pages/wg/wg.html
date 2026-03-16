@@ -10,9 +10,9 @@
         <span class="wg__headline-accent">BEAUTIFULLY TOLD.</span>
       </h1>
 
-      <p class="wg__subtext">
+      <!-- <p class="wg__subtext">
         Cinematic wedding films that capture the emotion, energy, and elegance of your most unforgettable day.
-      </p>
+      </p> -->
     </div>
 
     <!-- Right: Video -->
@@ -45,20 +45,33 @@
       Client <em>Reels</em>
     </h2>
 
+    <!-- Portrait reels (3-col desktop, 2-col mobile) -->
     <div class="display__track">
-      <div class="display__reel" *ngFor="let reel of reels; let i = index">
-        <div class="display__reel-frame" (click)="openReel(i)">
-
+      <div class="display__reel" *ngFor="let reel of portraitReels">
+        <div class="display__reel-frame" (click)="openReel(reel.index)">
           <video
             class="display__reel-video"
-            muted
-            loop
-            playsinline
-            preload="none"
+            muted loop playsinline preload="none"
             [poster]="reel.thumbnail">
           </video>
+          <div class="display__reel-overlay">
+            <svg class="display__reel-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Play overlay -->
+    <!-- Landscape reels (2-col desktop, 1-col mobile) -->
+    <div class="display__track-landscape">
+      <div class="display__reel-landscape" *ngFor="let reel of landscapeReels">
+        <div class="display__reel-frame display__reel-frame--landscape" (click)="openReel(reel.index)">
+          <video
+            class="display__reel-video"
+            muted loop playsinline preload="none"
+            [poster]="reel.thumbnail">
+          </video>
           <div class="display__reel-overlay">
             <svg class="display__reel-icon" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
@@ -80,7 +93,9 @@
   [class.reel-modal--open]="activeReelIndex !== null"
   (click)="closeReel()">
 
-  <div class="reel-modal__inner" (click)="$event.stopPropagation()">
+  <div class="reel-modal__inner"
+       [class.reel-modal__inner--landscape]="isActiveReelLandscape"
+       (click)="$event.stopPropagation()">
 
     <!-- Close button -->
     <button class="reel-modal__close" (click)="closeReel()" aria-label="Close">

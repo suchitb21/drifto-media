@@ -87,11 +87,8 @@ export class Portfolio {
 
   // Landscape 16:9 — Long Form
   longform: Slide[] = [
-    { thumb: 'https://picsum.photos/seed/l1/710/400', heading: 'Brand Documentary — Tata',  link: 'https://youtube.com', alt: 'Tata longform' },
-    { thumb: 'https://picsum.photos/seed/l2/710/400', heading: 'Product Deep Dive — Sony',  link: 'https://youtube.com', alt: 'Sony longform' },
-    { thumb: 'https://picsum.photos/seed/l3/710/400', heading: 'Founder Story — Zepto',     link: 'https://youtube.com', alt: 'Zepto longform' },
-    { thumb: 'https://picsum.photos/seed/l4/710/400', heading: 'Event Coverage — TechSparks',link: 'https://youtube.com', alt: 'TechSparks longform' },
-    { thumb: 'https://picsum.photos/seed/l5/710/400', heading: 'Series Pilot — Cult.fit',   link: 'https://youtube.com', alt: 'Cultfit longform' },
-    { thumb: 'https://picsum.photos/seed/l6/710/400', heading: 'Ad Film — Mamaearth',       link: 'https://youtube.com', alt: 'Mamaearth longform' },
+    { thumb: '/lf1.jpeg', heading: 'That\'s My Job',  link: 'https://www.youtube.com/watch?v=0sMOaFIjLq8', alt: 'TMJ' },
+    { thumb: '/lf2.jpeg', heading: 'Hanuman Mandir Tilak Nagar',  link: 'https://www.youtube.com/watch?v=NNvsOII05RE&t=154s', alt: 'HMTN' },
+    { thumb: '/lf3.jpeg', heading: 'Bean Kaffe',  link: 'https://youtu.be/oME5nPi1jDM?feature=shared', alt: 'BK' },
   ];
 }
