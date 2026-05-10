@@ -70,7 +70,9 @@ export class Portfolio {
     { thumb: '/tn/sushima.webp', heading: 'BRAND STORY',       link: 'https://www.instagram.com/reel/DSXhv_8jH9Z/?igsh=MWVrcTR4dzNoZHdsaA==', alt: 'BRAND STORY' },
     { thumb: '/tn/osd.webp', heading: 'F&B',    link: 'https://www.instagram.com/reel/DUtERPADf1N/?igsh=cWE3aGgzZG9zcGhi', alt: 'FNB' },
     { thumb: '/tn/tbk.webp', heading: 'INTERVIEW SERIES',    link: 'https://www.instagram.com/reel/DQrh3etjBVP/?igsh=Ym5pd3JoN2czeXhu', alt: 'INTERVIEW SERIES' },
-
+    { thumb: '/tn/pph1.webp', heading: 'INTERVIEW SERIES',    link: 'https://www.instagram.com/reel/DQrh3etjBVP/?igsh=Ym5pd3JoN2czeXhu', alt: 'INTERVIEW SERIES' },
+    { thumb: '/tn/pph2.webp', heading: 'F&B',    link: 'https://www.instagram.com/reel/DX4St3AMCXJ/?igsh=MWI2cDJ3ZmZrYzlvMQ==', alt: 'PPH' },
+    { thumb: '/tn/pph2.webp', heading: 'F&B',    link: 'https://www.instagram.com/reel/DXw-geAuizB/?igsh=MWNrNHJuMGh3aGJ1eA==', alt: 'PPH' },
   ];
 
   // Square 1:1 — Social Media Creatives (display only, no links)
